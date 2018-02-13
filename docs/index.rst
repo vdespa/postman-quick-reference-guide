@@ -10,6 +10,8 @@ Welcome to Postman Quick Reference Guide's documentation!
    :maxdepth: 2
    :caption: Contents:
 
+   cheatsheet
+
 
 
 Indices and tables
