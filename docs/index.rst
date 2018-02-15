@@ -6,9 +6,20 @@
 Welcome to Postman Quick Reference Guide's documentation!
 =========================================================
 
+.. Simple solutions to common problems
 
-Simple solutions to common problems
------------------------------------
+
+Cheatsheet
+----------
+
+.. toctree::
+   :maxdepth: 2
+   :caption: XXXX:
+
+   cheatsheet
+
+Foo
+---
 
 .. toctree::
    :maxdepth: 2
