@@ -1,0 +1,167 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+        <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>Workflows &#8212; Postman Quick Reference Guide February 2018 documentation</title>
+    <link rel="stylesheet" href="_static/alabaster.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <script type="text/javascript" src="_static/documentation_options.js"></script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Newman" href="newman.html" />
+    <link rel="prev" title="Assertions" href="assertions.html" />
+   
+  <link rel="stylesheet" href="_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="workflows">
+<h1>Workflows<a class="headerlink" href="#workflows" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="how-to-extract-value-of-an-authentication-token-from-a-login-response-body-and-pass-in-subsequent-request-as-bearer-token">
+<h2>How to extract value of an authentication token from a login response body and pass in subsequent request as ‘Bearer Token’?<a class="headerlink" href="#how-to-extract-value-of-an-authentication-token-from-a-login-response-body-and-pass-in-subsequent-request-as-bearer-token" title="Permalink to this headline">¶</a></h2>
+<p>Given the response from the authentication server:</p>
+<div class="highlight-javascript notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
+    <span class="s2">&quot;accessToken&quot;</span><span class="o">:</span> <span class="s2">&quot;foo&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;refreshToken&quot;</span><span class="o">:</span> <span class="s2">&quot;bar&quot;</span>
+    <span class="s2">&quot;expires&quot;</span><span class="o">:</span> <span class="s2">&quot;1234&quot;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>Extract the value of the token from the response in the <strong>Tests</strong> tab:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">var</span> <span class="n">jsonData</span> <span class="o">=</span> <span class="n">pm</span><span class="o">.</span><span class="n">response</span><span class="o">.</span><span class="n">json</span><span class="p">();</span>
+<span class="n">var</span> <span class="n">token</span> <span class="o">=</span> <span class="n">jsonData</span><span class="o">.</span><span class="n">accessToken</span><span class="p">;</span>
+</pre></div>
+</div>
+<p>Set the token as a variable (global, environment, etc) so that it can used in later requests:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">pm</span><span class="o">.</span><span class="n">globals</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="s1">&#39;token&#39;</span><span class="p">,</span> <span class="n">token</span><span class="p">);</span>
+</pre></div>
+</div>
+<p>To use the token in the next request, in the headers part the following needs to be added (key:value example below):</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>Authorization:Bearer {‌{token}}
+</pre></div>
+</div>
+</div>
+<div class="section" id="how-to-read-links-from-response-and-execute-a-request-for-each-of-them">
+<h2>How to read links from response and execute a request for each of them?<a class="headerlink" href="#how-to-read-links-from-response-and-execute-a-request-for-each-of-them" title="Permalink to this headline">¶</a></h2>
+<p>Given the following response:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
+    <span class="s2">&quot;links&quot;</span><span class="p">:</span> <span class="p">[</span>
+        <span class="s2">&quot;http://example.com/1&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;http://example.com/2&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;http://example.com/3&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;http://example.com/4&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;http://example.com/5&quot;</span>
+    <span class="p">]</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>With the following code we will read the response, iterate over the links array and for each link will submit a request, using <code class="docutils literal notranslate"><span class="pre">pm.sendRequest</span></code>. For each response we will assert the status code.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">//</span> <span class="n">Parse</span> <span class="n">the</span> <span class="n">response</span>
+<span class="n">var</span> <span class="n">jsonData</span> <span class="o">=</span> <span class="n">pm</span><span class="o">.</span><span class="n">response</span><span class="o">.</span><span class="n">json</span><span class="p">();</span>
+
+<span class="o">//</span> <span class="n">Check</span> <span class="n">the</span> <span class="n">response</span>
+<span class="n">pm</span><span class="o">.</span><span class="n">test</span><span class="p">(</span><span class="s2">&quot;Response contains links&quot;</span><span class="p">,</span> <span class="n">function</span> <span class="p">()</span> <span class="p">{</span>
+    <span class="n">pm</span><span class="o">.</span><span class="n">response</span><span class="o">.</span><span class="n">to</span><span class="o">.</span><span class="n">have</span><span class="o">.</span><span class="n">status</span><span class="p">(</span><span class="mi">200</span><span class="p">);</span>
+    <span class="n">pm</span><span class="o">.</span><span class="n">expect</span><span class="p">(</span><span class="n">jsonData</span><span class="o">.</span><span class="n">links</span><span class="p">)</span><span class="o">.</span><span class="n">to</span><span class="o">.</span><span class="n">be</span><span class="o">.</span><span class="n">an</span><span class="p">(</span><span class="s1">&#39;array&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">that</span><span class="o">.</span><span class="ow">is</span><span class="o">.</span><span class="ow">not</span><span class="o">.</span><span class="n">empty</span><span class="p">;</span>
+<span class="p">});</span>
+
+
+<span class="o">//</span> <span class="n">Iterate</span> <span class="n">over</span> <span class="n">the</span> <span class="n">response</span>
+<span class="n">var</span> <span class="n">links</span> <span class="o">=</span> <span class="n">jsonData</span><span class="o">.</span><span class="n">links</span><span class="p">;</span>
+
+<span class="n">links</span><span class="o">.</span><span class="n">forEach</span><span class="p">(</span><span class="n">function</span><span class="p">(</span><span class="n">link</span><span class="p">)</span> <span class="p">{</span>
+    <span class="n">pm</span><span class="o">.</span><span class="n">test</span><span class="p">(</span><span class="s2">&quot;Status code is 404&quot;</span><span class="p">,</span> <span class="n">function</span> <span class="p">()</span> <span class="p">{</span>
+        <span class="n">pm</span><span class="o">.</span><span class="n">sendRequest</span><span class="p">(</span><span class="n">link</span><span class="p">,</span> <span class="n">function</span> <span class="p">(</span><span class="n">err</span><span class="p">,</span> <span class="n">res</span><span class="p">)</span> <span class="p">{</span>
+            <span class="n">pm</span><span class="o">.</span><span class="n">expect</span><span class="p">(</span><span class="n">res</span><span class="p">)</span><span class="o">.</span><span class="n">to</span><span class="o">.</span><span class="n">have</span><span class="o">.</span><span class="n">property</span><span class="p">(</span><span class="s1">&#39;code&#39;</span><span class="p">,</span> <span class="mi">404</span><span class="p">);</span>
+        <span class="p">});</span>
+    <span class="p">});</span>
+<span class="p">});</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="how-to-create-request-parameterization-from-excel-or-json-file">
+<h2>How to create request parameterization from Excel or JSON file?<a class="headerlink" href="#how-to-create-request-parameterization-from-excel-or-json-file" title="Permalink to this headline">¶</a></h2>
+<p>TODO</p>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">Workflows</a><ul>
+<li><a class="reference internal" href="#how-to-extract-value-of-an-authentication-token-from-a-login-response-body-and-pass-in-subsequent-request-as-bearer-token">How to extract value of an authentication token from a login response body and pass in subsequent request as ‘Bearer Token’?</a></li>
+<li><a class="reference internal" href="#how-to-read-links-from-response-and-execute-a-request-for-each-of-them">How to read links from response and execute a request for each of them?</a></li>
+<li><a class="reference internal" href="#how-to-create-request-parameterization-from-excel-or-json-file">How to create request parameterization from Excel or JSON file?</a></li>
+</ul>
+</li>
+</ul>
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="index.html">Documentation overview</a><ul>
+      <li>Previous: <a href="assertions.html" title="previous chapter">Assertions</a></li>
+      <li>Next: <a href="newman.html" title="next chapter">Newman</a></li>
+  </ul></li>
+</ul>
+</div>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="_sources/workflows.rst.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    </div>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2018, Valentin Despa.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 1.7.0</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.10</a>
+      
+      |
+      <a href="_sources/workflows.rst.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>

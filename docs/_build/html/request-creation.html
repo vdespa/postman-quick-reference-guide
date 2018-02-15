@@ -1,0 +1,227 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+        <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>Request creation &#8212; Postman Quick Reference Guide February 2018 documentation</title>
+    <link rel="stylesheet" href="_static/alabaster.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <script type="text/javascript" src="_static/documentation_options.js"></script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Assertions" href="assertions.html" />
+    <link rel="prev" title="Postman Cheatsheet" href="cheatsheet.html" />
+   
+  <link rel="stylesheet" href="_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="request-creation">
+<h1>Request creation<a class="headerlink" href="#request-creation" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="i-have-an-environment-variable-as-url-can-i-use-it-inside-a-script-like-pm-sendrequest">
+<h2>I have an environment variable as {‌{url}}. Can I use it inside a script (like pm.sendRequest)?<a class="headerlink" href="#i-have-an-environment-variable-as-url-can-i-use-it-inside-a-script-like-pm-sendrequest" title="Permalink to this headline">¶</a></h2>
+<p>The following syntax will not work while writing scripts:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>pm.sendRequest({‌{url}}/mediaitem/)
+</pre></div>
+</div>
+<p>You are inside a script, so you need to use the pm.* API to get to that variable. The syntax {‌{url}} works only inside the request builder, not in scripts.</p>
+<p>Example:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">var</span> <span class="n">requestUrl</span> <span class="o">=</span> <span class="n">pm</span><span class="o">.</span><span class="n">environment</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;url&quot;</span><span class="p">)</span> <span class="o">+</span> <span class="s2">&quot;/mediaitem/&quot;</span><span class="p">);</span>
+
+<span class="n">pm</span><span class="o">.</span><span class="n">sendRequest</span><span class="p">(</span><span class="n">requestUrl</span><span class="p">,</span> <span class="n">function</span> <span class="p">(</span><span class="n">err</span><span class="p">,</span> <span class="n">res</span><span class="p">)</span> <span class="p">{</span>
+    <span class="o">//</span> <span class="n">do</span> <span class="n">stuff</span>
+<span class="p">});</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="how-to-use-pre-request-script-to-pass-dynamic-data-in-the-request-body">
+<h2>How to use pre-request script to pass dynamic data in the request body?<a class="headerlink" href="#how-to-use-pre-request-script-to-pass-dynamic-data-in-the-request-body" title="Permalink to this headline">¶</a></h2>
+<p>In the pre-request script you can simply create a JavaScript object, set the desired values and save it as a variable ()</p>
+<p>For example if you want to send a request body that looks like:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
+    <span class="s2">&quot;firstName&quot;</span><span class="p">:</span> <span class="s2">&quot;First Name&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;lastName&quot;</span><span class="p">:</span> <span class="s2">&quot;Last Name&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;email&quot;</span><span class="p">:</span> <span class="s2">&quot;test@example.com&quot;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>You can do the following in the pre-request script:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">//</span> <span class="n">Define</span> <span class="n">a</span> <span class="n">new</span> <span class="nb">object</span>
+<span class="n">var</span> <span class="n">user</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s2">&quot;firstName&quot;</span><span class="p">:</span> <span class="s2">&quot;First Name&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;lastName&quot;</span><span class="p">:</span> <span class="s2">&quot;Last Name&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;email&quot;</span><span class="p">:</span> <span class="s2">&quot;test@example.com&quot;</span>
+<span class="p">}</span>
+
+<span class="o">//</span> <span class="n">Save</span> <span class="n">the</span> <span class="nb">object</span> <span class="k">as</span> <span class="n">a</span> <span class="n">variable</span><span class="o">.</span>
+<span class="o">//</span> <span class="n">JSON</span><span class="o">.</span><span class="n">stringify</span> <span class="n">will</span> <span class="n">serialize</span> <span class="n">the</span> <span class="nb">object</span> <span class="n">so</span> <span class="n">that</span> <span class="n">Postman</span> <span class="n">can</span> <span class="n">save</span> <span class="n">it</span>
+<span class="n">pm</span><span class="o">.</span><span class="n">globals</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="s1">&#39;user&#39;</span><span class="p">,</span> <span class="n">JSON</span><span class="o">.</span><span class="n">stringify</span><span class="p">(</span><span class="n">user</span><span class="p">));</span>
+</pre></div>
+</div>
+<p>In the request body you can simply use <code class="docutils literal notranslate"><span class="pre">{{user}}</span></code>. This also works just as well for nested objects:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
+    <span class="s2">&quot;user&quot;</span><span class="p">:</span> <span class="p">{{</span><span class="n">user</span><span class="p">}}</span>
+    <span class="s2">&quot;address&quot;</span><span class="p">:</span> <span class="p">{</span>
+        <span class="s2">&quot;street&quot;</span><span class="p">:</span> <span class="s2">&quot;Foo&quot;</span>
+        <span class="s2">&quot;number&quot;</span><span class="p">:</span> <span class="s2">&quot;2&quot;</span>
+        <span class="s2">&quot;city&quot;</span><span class="p">:</span> <span class="s2">&quot;Bar&quot;</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="how-to-generate-random-data">
+<h2>How to generate random data?<a class="headerlink" href="#how-to-generate-random-data" title="Permalink to this headline">¶</a></h2>
+<p><strong>Option 1</strong> Using existing Postman random generators</p>
+<p>If you need to create an unique string (with every request) and pass it in the request body, in the example below there will be generated an unique GroupName everytime the request is executed.</p>
+<p>You can use the variable <code class="docutils literal notranslate"><span class="pre">{‌{$guid}}</span></code> - this is automatically generated by Postman. Or you can use the current timestamp, <code class="docutils literal notranslate"><span class="pre">{‌{$timestamp}}</span></code>:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
+    <span class="s2">&quot;GroupName&quot;</span><span class="p">:</span><span class="s2">&quot;GroupName_{‌{$guid}}&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;Description&quot;</span><span class="p">:</span> <span class="s2">&quot;Example_API_Admin-Group_Description&quot;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>This will generate something like:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
+    <span class="s2">&quot;GroupName&quot;</span><span class="p">:</span><span class="s2">&quot;GroupName_0542bd53-f030-4e3b-b7bc-d496e71d16a0&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;Description&quot;</span><span class="p">:</span> <span class="s2">&quot;Example_API_Admin-Group_Description&quot;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>The disadvantage of this method is that you cannot use these special variables in a pre-request script or test. Additionally they will be only generated once per request, so using <code class="docutils literal notranslate"><span class="pre">{‌{$guid}}</span></code> more than once will generate the same data in a request.</p>
+<p><strong>Option 2</strong> Using existing JavaScript random generators</p>
+<p>TODO</p>
+</div>
+<div class="section" id="how-to-trigger-another-another-request-from-pre-request-script">
+<h2>How to trigger another another request from pre-request script?<a class="headerlink" href="#how-to-trigger-another-another-request-from-pre-request-script" title="Permalink to this headline">¶</a></h2>
+<p><strong>Option 1</strong> You can trigger another request in the collection from the pre-request script using <code class="docutils literal notranslate"><span class="pre">postman.setNextRequest</span></code>.</p>
+<p>That can be done with:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">postman</span><span class="o">.</span><span class="n">setNextRequest</span><span class="p">(</span><span class="s1">&#39;Your request name as saved in Postman&#39;</span><span class="p">);</span>
+</pre></div>
+</div>
+<p>The difficulty is returning to the request that initiated the call. Additionally you need to make sure you do not create endless loops.</p>
+<p><strong>Option 2</strong> Another possibility is making an HTTP call from the pre-request script to fetch any data you might need.</p>
+<p>Below I am fetching a name from a remote API and setting it as a variable for use in the actual request that will execute right after the pre-request script completed:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">var</span> <span class="n">options</span> <span class="o">=</span> <span class="p">{</span> <span class="n">method</span><span class="p">:</span> <span class="s1">&#39;GET&#39;</span><span class="p">,</span>
+  <span class="n">url</span><span class="p">:</span> <span class="s1">&#39;http://www.mocky.io/v2/5a849eee300000580069b022&#39;</span>
+<span class="p">};</span>
+
+<span class="n">pm</span><span class="o">.</span><span class="n">sendRequest</span><span class="p">(</span><span class="n">options</span><span class="p">,</span> <span class="n">function</span> <span class="p">(</span><span class="n">error</span><span class="p">,</span> <span class="n">response</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">if</span> <span class="p">(</span><span class="n">error</span><span class="p">)</span> <span class="n">throw</span> <span class="n">new</span> <span class="n">Error</span><span class="p">(</span><span class="n">error</span><span class="p">);</span>
+    <span class="n">var</span> <span class="n">jsonData</span> <span class="o">=</span> <span class="n">response</span><span class="o">.</span><span class="n">json</span><span class="p">();</span>
+    <span class="n">pm</span><span class="o">.</span><span class="n">globals</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="s1">&#39;name&#39;</span><span class="p">,</span> <span class="s1">&#39;jsonData.name&#39;</span><span class="p">);</span>
+<span class="p">});</span>
+</pre></div>
+</div>
+<p><strong>Tip</strong> You can generate such requests by using the “Code” generator button right below the Save button, once you have a request that works. There you can Select NodeJS &gt; Request and the syntax generated is very similar to what Postman expects.</p>
+<p>You can import this example in Postman by using this link: <a class="reference external" href="https://www.getpostman.com/collections/5a61c265d4a7bbd8b303">https://www.getpostman.com/collections/5a61c265d4a7bbd8b303</a></p>
+</div>
+<div class="section" id="how-to-pass-arrays-and-objects-between-requests">
+<h2>How to pass arrays and objects between requests?<a class="headerlink" href="#how-to-pass-arrays-and-objects-between-requests" title="Permalink to this headline">¶</a></h2>
+<p>Assuming your response is in JSON format, You can extract data from the response by using</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">var</span> <span class="n">jsonData</span> <span class="o">=</span> <span class="n">pm</span><span class="o">.</span><span class="n">response</span><span class="o">.</span><span class="n">json</span><span class="p">();</span>
+</pre></div>
+</div>
+<p>After this you can set the whole response (or just a subset like this):</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">pm</span><span class="o">.</span><span class="n">environment</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="s1">&#39;myData&#39;</span><span class="p">,</span> <span class="n">JSON</span><span class="o">.</span><span class="n">stringify</span><span class="p">(</span><span class="n">jsonData</span><span class="p">));</span>
+</pre></div>
+</div>
+<p>You need to use JSON.stringify() before saving objects / arrays to a Postman variable. Otherwise it will not work.</p>
+<p>In the next request where you want to retrieve the data, just use:</p>
+<ul class="simple">
+<li><code class="docutils literal notranslate"><span class="pre">{myData}}</span></code> if you are inside the request builder</li>
+<li><code class="docutils literal notranslate"><span class="pre">var</span> <span class="pre">myData</span> <span class="pre">=</span> <span class="pre">JSON.parse(pm.environment.get('myData'));</span></code></li>
+</ul>
+<p>Using JSON.stringify and JSON.parse methods is not needed if the values are strings or integers or booleans.</p>
+<p>JSON.stringify() converts a value to a JSON string while JSON.parse() method parses a JSON string, creating the value described by the string.</p>
+</div>
+<div class="section" id="how-to-read-external-files">
+<h2>How to read external files?<a class="headerlink" href="#how-to-read-external-files" title="Permalink to this headline">¶</a></h2>
+<p>If you have some information saved on a file locally on your computer, you might want to access this information with Postman.</p>
+<p>Unfortunately this is not really possible. There is a way to read a data file in JSON or CSV format, which allows you to make some variables dynamic. These variables are called data variables and are mostly used for testing different iterations on a specific request or collection.</p>
+<p>The alternative would be to start a local server to serve that file and to get it in Postman with a GET request.</p>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">Request creation</a><ul>
+<li><a class="reference internal" href="#i-have-an-environment-variable-as-url-can-i-use-it-inside-a-script-like-pm-sendrequest">I have an environment variable as {‌{url}}. Can I use it inside a script (like pm.sendRequest)?</a></li>
+<li><a class="reference internal" href="#how-to-use-pre-request-script-to-pass-dynamic-data-in-the-request-body">How to use pre-request script to pass dynamic data in the request body?</a></li>
+<li><a class="reference internal" href="#how-to-generate-random-data">How to generate random data?</a></li>
+<li><a class="reference internal" href="#how-to-trigger-another-another-request-from-pre-request-script">How to trigger another another request from pre-request script?</a></li>
+<li><a class="reference internal" href="#how-to-pass-arrays-and-objects-between-requests">How to pass arrays and objects between requests?</a></li>
+<li><a class="reference internal" href="#how-to-read-external-files">How to read external files?</a></li>
+</ul>
+</li>
+</ul>
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="index.html">Documentation overview</a><ul>
+      <li>Previous: <a href="cheatsheet.html" title="previous chapter">Postman Cheatsheet</a></li>
+      <li>Next: <a href="assertions.html" title="next chapter">Assertions</a></li>
+  </ul></li>
+</ul>
+</div>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="_sources/request-creation.rst.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    </div>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2018, Valentin Despa.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 1.7.0</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.10</a>
+      
+      |
+      <a href="_sources/request-creation.rst.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>

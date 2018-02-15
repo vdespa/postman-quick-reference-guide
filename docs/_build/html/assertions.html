@@ -1,0 +1,273 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+        <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>Assertions &#8212; Postman Quick Reference Guide February 2018 documentation</title>
+    <link rel="stylesheet" href="_static/alabaster.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <script type="text/javascript" src="_static/documentation_options.js"></script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Workflows" href="workflows.html" />
+    <link rel="prev" title="Request creation" href="request-creation.html" />
+   
+  <link rel="stylesheet" href="_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="assertions">
+<h1>Assertions<a class="headerlink" href="#assertions" title="Permalink to this headline">¶</a></h1>
+<p>Assertions in Postman are based on the capabilities of the Chai Assertion Library.
+You can read an extensive documentation on Chai by visiting <a class="reference external" href="http://chaijs.com/api/bdd/">http://chaijs.com/api/bdd/</a></p>
+<div class="section" id="how-find-object-in-array-by-property-value">
+<h2>How find object in array by property value?<a class="headerlink" href="#how-find-object-in-array-by-property-value" title="Permalink to this headline">¶</a></h2>
+<p>Given the following response:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
+    <span class="s2">&quot;companyId&quot;</span><span class="p">:</span> <span class="mi">10101</span><span class="p">,</span>
+    <span class="s2">&quot;regionId&quot;</span><span class="p">:</span> <span class="mi">36554</span><span class="p">,</span>
+    <span class="s2">&quot;filters&quot;</span><span class="p">:</span> <span class="p">[</span>
+        <span class="p">{</span>
+            <span class="s2">&quot;id&quot;</span><span class="p">:</span> <span class="mi">101</span><span class="p">,</span>
+            <span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;VENDOR&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;isAllowed&quot;</span><span class="p">:</span> <span class="n">false</span>
+        <span class="p">},</span>
+        <span class="p">{</span>
+            <span class="s2">&quot;id&quot;</span><span class="p">:</span> <span class="mi">102</span><span class="p">,</span>
+            <span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;COUNTRY&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;isAllowed&quot;</span><span class="p">:</span> <span class="n">true</span>
+        <span class="p">},</span>
+        <span class="p">{</span>
+            <span class="s2">&quot;id&quot;</span><span class="p">:</span> <span class="mi">103</span><span class="p">,</span>
+            <span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;MANUFACTURER&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;isAllowed&quot;</span><span class="p">:</span> <span class="n">false</span>
+        <span class="p">}</span>
+    <span class="p">]</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>Assert that the property isAllowed is true for the COUNTRY filter.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">pm</span><span class="o">.</span><span class="n">test</span><span class="p">(</span><span class="s2">&quot;Check the country filter is allowed&quot;</span><span class="p">,</span> <span class="n">function</span> <span class="p">()</span> <span class="p">{</span>
+    <span class="o">//</span> <span class="n">Parse</span> <span class="n">response</span> <span class="n">body</span>
+    <span class="n">var</span> <span class="n">jsonData</span> <span class="o">=</span> <span class="n">pm</span><span class="o">.</span><span class="n">response</span><span class="o">.</span><span class="n">json</span><span class="p">();</span>
+
+    <span class="o">//</span> <span class="n">Find</span> <span class="n">the</span> <span class="n">array</span> <span class="n">index</span> <span class="k">for</span> <span class="n">the</span> <span class="n">COUNTRY</span>
+    <span class="n">var</span> <span class="n">countryFilterIndex</span> <span class="o">=</span> <span class="n">jsonData</span><span class="o">.</span><span class="n">filters</span><span class="o">.</span><span class="n">map</span><span class="p">(</span>
+            <span class="n">function</span><span class="p">(</span><span class="nb">filter</span><span class="p">)</span> <span class="p">{</span>
+                <span class="k">return</span> <span class="nb">filter</span><span class="o">.</span><span class="n">name</span><span class="p">;</span> <span class="o">//</span> <span class="o">&lt;--</span> <span class="n">HERE</span> <span class="ow">is</span> <span class="n">the</span> <span class="n">name</span> <span class="n">of</span> <span class="n">the</span> <span class="nb">property</span>
+            <span class="p">}</span>
+        <span class="p">)</span><span class="o">.</span><span class="n">indexOf</span><span class="p">(</span><span class="s1">&#39;COUNTRY&#39;</span><span class="p">);</span> <span class="o">//</span> <span class="o">&lt;--</span> <span class="n">HERE</span> <span class="ow">is</span> <span class="n">the</span> <span class="n">value</span> <span class="n">we</span> <span class="n">are</span> <span class="n">searching</span> <span class="k">for</span>
+
+    <span class="o">//</span> <span class="n">Get</span> <span class="n">the</span> <span class="n">country</span> <span class="nb">filter</span> <span class="nb">object</span> <span class="n">by</span> <span class="n">using</span> <span class="n">the</span> <span class="n">index</span> <span class="n">calculated</span> <span class="n">above</span>
+    <span class="n">var</span> <span class="n">countryFilter</span> <span class="o">=</span> <span class="n">jsonData</span><span class="o">.</span><span class="n">filters</span><span class="p">[</span><span class="n">countryFilterIndex</span><span class="p">];</span>
+
+    <span class="o">//</span> <span class="n">Check</span> <span class="n">that</span> <span class="n">the</span> <span class="n">country</span> <span class="nb">filter</span> <span class="n">exists</span>
+    <span class="n">pm</span><span class="o">.</span><span class="n">expect</span><span class="p">(</span><span class="n">countryFilter</span><span class="p">)</span><span class="o">.</span><span class="n">to</span><span class="o">.</span><span class="n">exist</span><span class="p">;</span>
+
+    <span class="o">//</span> <span class="n">Check</span> <span class="n">that</span> <span class="n">the</span> <span class="n">country</span> <span class="nb">filter</span> <span class="ow">is</span> <span class="n">allowed</span>
+    <span class="n">pm</span><span class="o">.</span><span class="n">expect</span><span class="p">(</span><span class="n">countryFilter</span><span class="o">.</span><span class="n">isAllowed</span><span class="p">)</span><span class="o">.</span><span class="n">to</span><span class="o">.</span><span class="n">be</span><span class="o">.</span><span class="n">true</span><span class="p">;</span>
+<span class="p">});</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="how-to-compare-value-of-a-response-with-an-already-defined-variable">
+<h2>How to compare value of a response with an already defined variable?<a class="headerlink" href="#how-to-compare-value-of-a-response-with-an-already-defined-variable" title="Permalink to this headline">¶</a></h2>
+<p>Lets presume you have a value from a previous response (or other source) that is saved to a variable.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">//</span> <span class="n">Getting</span> <span class="n">values</span> <span class="kn">from</span> <span class="nn">response</span>
+<span class="n">var</span> <span class="n">jsonData</span> <span class="o">=</span> <span class="n">pm</span><span class="o">.</span><span class="n">response</span><span class="o">.</span><span class="n">json</span><span class="p">();</span>
+<span class="n">var</span> <span class="n">username</span> <span class="o">=</span> <span class="n">jsonData</span><span class="o">.</span><span class="n">userName</span><span class="p">;</span>
+
+<span class="o">//</span> <span class="n">Saving</span> <span class="n">the</span> <span class="n">value</span> <span class="k">for</span> <span class="n">later</span> <span class="n">use</span>
+<span class="n">pm</span><span class="o">.</span><span class="n">globals</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="s2">&quot;username&quot;</span><span class="p">,</span> <span class="n">username</span><span class="p">);</span>
+</pre></div>
+</div>
+<p>How do you compare that variable with values from another API response?</p>
+<p>In order to access the variable in the script, you need to use a special method, basically the companion of setting a variable. Curly brackets will not work in this case:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">pm</span><span class="o">.</span><span class="n">test</span><span class="p">(</span><span class="s2">&quot;Your test name&quot;</span><span class="p">,</span> <span class="n">function</span> <span class="p">()</span> <span class="p">{</span>
+    <span class="n">var</span> <span class="n">jsonData</span> <span class="o">=</span> <span class="n">pm</span><span class="o">.</span><span class="n">response</span><span class="o">.</span><span class="n">json</span><span class="p">();</span>
+    <span class="n">pm</span><span class="o">.</span><span class="n">expect</span><span class="p">(</span><span class="n">jsonData</span><span class="o">.</span><span class="n">value</span><span class="p">)</span><span class="o">.</span><span class="n">to</span><span class="o">.</span><span class="n">eql</span><span class="p">(</span><span class="n">pm</span><span class="o">.</span><span class="n">globals</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;username&quot;</span><span class="p">));</span>
+<span class="p">});</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="how-to-compare-value-of-a-response-against-multiple-valid-values">
+<h2>How to compare value of a response against multiple valid values?<a class="headerlink" href="#how-to-compare-value-of-a-response-against-multiple-valid-values" title="Permalink to this headline">¶</a></h2>
+<p>Given the following API response:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
+    <span class="s2">&quot;SiteId&quot;</span><span class="p">:</span> <span class="s2">&quot;aaa-ccc-xxx&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;ACL&quot;</span><span class="p">:</span> <span class="p">[</span>
+        <span class="p">{</span>
+            <span class="s2">&quot;GroupId&quot;</span><span class="p">:</span> <span class="s2">&quot;xxx-xxx-xx-xxx-xx&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;TargetType&quot;</span><span class="p">:</span> <span class="s2">&quot;Subscriber&quot;</span>
+        <span class="p">}</span>
+    <span class="p">]</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>You want to check that <code class="docutils literal notranslate"><span class="pre">TargetType</span></code> is <em>Subscriber</em> or <em>Customer</em>.</p>
+<p>The assertion can look like:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">pm</span><span class="o">.</span><span class="n">test</span><span class="p">(</span><span class="s2">&quot;Should be subscriber or customer&quot;</span><span class="p">,</span> <span class="n">function</span> <span class="p">()</span> <span class="p">{</span>
+    <span class="n">var</span> <span class="n">jsonData</span> <span class="o">=</span> <span class="n">pm</span><span class="o">.</span><span class="n">response</span><span class="o">.</span><span class="n">json</span><span class="p">();</span>
+    <span class="n">pm</span><span class="o">.</span><span class="n">expect</span><span class="p">(</span><span class="o">.</span><span class="n">TargetType</span><span class="p">)</span><span class="o">.</span><span class="n">to</span><span class="o">.</span><span class="n">be</span><span class="o">.</span><span class="n">oneOf</span><span class="p">([</span><span class="s2">&quot;Subscriber&quot;</span><span class="p">,</span> <span class="s2">&quot;Customer&quot;</span><span class="p">]);</span>
+<span class="p">});</span>
+</pre></div>
+</div>
+<dl class="docutils">
+<dt>where:</dt>
+<dd><ul class="first last simple">
+<li>jsonData.ACL[0] is the first element of the ACL array</li>
+<li>to.be.oneOf allows an array of possible valid values</li>
+</ul>
+</dd>
+</dl>
+</div>
+<div class="section" id="how-to-parse-a-html-response-to-extract-a-specific-value">
+<h2>How to parse a HTML response to extract a specific value?<a class="headerlink" href="#how-to-parse-a-html-response-to-extract-a-specific-value" title="Permalink to this headline">¶</a></h2>
+<p>Presumed you want to get the _csrf hidden field value for assertions or later use from the response below:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">&lt;</span><span class="n">form</span> <span class="n">name</span><span class="o">=</span><span class="s2">&quot;loginForm&quot;</span> <span class="n">action</span><span class="o">=</span><span class="s2">&quot;/login&quot;</span> <span class="n">method</span><span class="o">=</span><span class="s2">&quot;POST&quot;</span><span class="o">&gt;</span>
+        <span class="o">&lt;</span><span class="nb">input</span> <span class="nb">type</span><span class="o">=</span><span class="s2">&quot;hidden&quot;</span> <span class="n">name</span><span class="o">=</span><span class="s2">&quot;_csrf&quot;</span> <span class="n">value</span><span class="o">=</span><span class="s2">&quot;a0e2d230-9d3e-4066-97ce-f1c3cdc37915&quot;</span> <span class="o">/&gt;</span>
+        <span class="o">&lt;</span><span class="n">ul</span><span class="o">&gt;</span>
+            <span class="o">&lt;</span><span class="n">li</span><span class="o">&gt;</span>
+                <span class="o">&lt;</span><span class="n">label</span> <span class="k">for</span><span class="o">=</span><span class="s2">&quot;username&quot;</span><span class="o">&gt;</span><span class="n">Username</span><span class="p">:</span><span class="o">&lt;/</span><span class="n">label</span><span class="o">&gt;</span>
+                <span class="o">&lt;</span><span class="nb">input</span> <span class="n">required</span> <span class="nb">type</span><span class="o">=</span><span class="s2">&quot;text&quot;</span> <span class="nb">id</span><span class="o">=</span><span class="s2">&quot;username&quot;</span> <span class="n">name</span><span class="o">=</span><span class="s2">&quot;username&quot;</span> <span class="o">/&gt;</span>
+            <span class="o">&lt;/</span><span class="n">li</span><span class="o">&gt;</span>
+            <span class="o">&lt;</span><span class="n">li</span><span class="o">&gt;</span>
+                <span class="o">&lt;</span><span class="n">label</span> <span class="k">for</span><span class="o">=</span><span class="s2">&quot;password&quot;</span><span class="o">&gt;</span><span class="n">Password</span><span class="p">:</span><span class="o">&lt;/</span><span class="n">label</span><span class="o">&gt;</span>
+                <span class="o">&lt;</span><span class="nb">input</span> <span class="n">required</span> <span class="nb">type</span><span class="o">=</span><span class="s2">&quot;password&quot;</span> <span class="nb">id</span><span class="o">=</span><span class="s2">&quot;password&quot;</span> <span class="n">name</span><span class="o">=</span><span class="s2">&quot;password&quot;</span> <span class="o">/&gt;</span>
+            <span class="o">&lt;/</span><span class="n">li</span><span class="o">&gt;</span>
+            <span class="o">&lt;</span><span class="n">li</span><span class="o">&gt;</span>
+                <span class="o">&lt;</span><span class="nb">input</span> <span class="n">name</span><span class="o">=</span><span class="s2">&quot;submit&quot;</span> <span class="nb">type</span><span class="o">=</span><span class="s2">&quot;submit&quot;</span> <span class="n">value</span><span class="o">=</span><span class="s2">&quot;Login&quot;</span> <span class="o">/&gt;</span>
+            <span class="o">&lt;/</span><span class="n">li</span><span class="o">&gt;</span>
+        <span class="o">&lt;/</span><span class="n">ul</span><span class="o">&gt;</span>
+<span class="o">&lt;/</span><span class="n">form</span><span class="o">&gt;</span>
+</pre></div>
+</div>
+<p>To parse and retrive the value, we will use the cherrio JavaScript library:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">//</span> <span class="n">Parse</span> <span class="n">HTML</span> <span class="ow">and</span> <span class="n">get</span> <span class="n">the</span> <span class="n">CSRF</span> <span class="n">token</span>
+<span class="n">responseHTML</span> <span class="o">=</span> <span class="n">cheerio</span><span class="p">(</span><span class="n">pm</span><span class="o">.</span><span class="n">response</span><span class="o">.</span><span class="n">text</span><span class="p">());</span>
+<span class="n">console</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">responseHTML</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="s1">&#39;[name=&quot;_csrf&quot;]&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">val</span><span class="p">());</span>
+</pre></div>
+</div>
+<p>Cheerio is desinged for non-browser use and implements a subset of the jQuery functionality. Read more about it at <a class="reference external" href="https://github.com/cheeriojs/cheerio">https://github.com/cheeriojs/cheerio</a></p>
+</div>
+<div class="section" id="how-to-fix-the-error-referenceerror-jsondata-is-not-defined">
+<h2>How to fix the error “ReferenceError: jsonData is not defined”?<a class="headerlink" href="#how-to-fix-the-error-referenceerror-jsondata-is-not-defined" title="Permalink to this headline">¶</a></h2>
+<p>If you have a script like this:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">pm</span><span class="o">.</span><span class="n">test</span><span class="p">(</span><span class="s2">&quot;Name should be John&quot;</span><span class="p">,</span> <span class="n">function</span> <span class="p">()</span> <span class="p">{</span>
+    <span class="n">var</span> <span class="n">jsonData</span> <span class="o">=</span> <span class="n">pm</span><span class="o">.</span><span class="n">response</span><span class="o">.</span><span class="n">json</span><span class="p">();</span>
+    <span class="n">pm</span><span class="o">.</span><span class="n">expect</span><span class="p">(</span><span class="n">jsonData</span><span class="o">.</span><span class="n">name</span><span class="p">)</span><span class="o">.</span><span class="n">to</span><span class="o">.</span><span class="n">eql</span><span class="p">(</span><span class="s1">&#39;John&#39;</span><span class="p">);</span>
+<span class="p">});</span>
+
+<span class="n">pm</span><span class="o">.</span><span class="n">globals</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="s1">&#39;name&#39;</span><span class="p">,</span> <span class="n">jsonData</span><span class="o">.</span><span class="n">name</span><span class="p">);</span>
+</pre></div>
+</div>
+<p>You will get the error <code class="docutils literal notranslate"><span class="pre">ReferenceError:</span> <span class="pre">jsonData</span> <span class="pre">is</span> <span class="pre">not</span> <span class="pre">defined</span></code> while setting the global variable.</p>
+<p>The reason is that <code class="docutils literal notranslate"><span class="pre">jsonData</span></code> is only defined inside the scope of the anonymous function (the part with <code class="docutils literal notranslate"><span class="pre">function()</span> <span class="pre">{...}</span></code> inside <code class="docutils literal notranslate"><span class="pre">pm.test</span></code>). Where you are trying to set the global variables is outside the function, so <code class="docutils literal notranslate"><span class="pre">jsonData</span></code> is not defined. <code class="docutils literal notranslate"><span class="pre">jsonData</span></code> can only live within the scope where it was defined.</p>
+<p>So you have multiple ways to deal with this:</p>
+<ol class="arabic">
+<li><p class="first">define <code class="docutils literal notranslate"><span class="pre">jsonData</span></code> outside the function, for example before your pm.test function (preferred)</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">var</span> <span class="n">jsonData</span> <span class="o">=</span> <span class="n">pm</span><span class="o">.</span><span class="n">response</span><span class="o">.</span><span class="n">json</span><span class="p">();</span> <span class="o">&lt;--</span> <span class="n">defined</span> <span class="n">outside</span> <span class="n">callback</span>
+
+<span class="n">pm</span><span class="o">.</span><span class="n">test</span><span class="p">(</span><span class="s2">&quot;Name should be John&quot;</span><span class="p">,</span> <span class="n">function</span> <span class="p">()</span> <span class="p">{</span>
+    <span class="n">pm</span><span class="o">.</span><span class="n">expect</span><span class="p">(</span><span class="n">jsonData</span><span class="o">.</span><span class="n">name</span><span class="p">)</span><span class="o">.</span><span class="n">to</span><span class="o">.</span><span class="n">eql</span><span class="p">(</span><span class="s1">&#39;John&#39;</span><span class="p">);</span>
+<span class="p">});</span>
+
+<span class="n">pm</span><span class="o">.</span><span class="n">globals</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="s1">&#39;name&#39;</span><span class="p">,</span> <span class="n">jsonData</span><span class="o">.</span><span class="n">name</span><span class="p">);</span>
+</pre></div>
+</div>
+</li>
+<li><p class="first">set the environment or global variable inside the anonymous function (I would personally avoid mixing test / assertions with setting variables but it would work).</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">pm</span><span class="o">.</span><span class="n">test</span><span class="p">(</span><span class="s2">&quot;Name should be John&quot;</span><span class="p">,</span> <span class="n">function</span> <span class="p">()</span> <span class="p">{</span>
+    <span class="n">var</span> <span class="n">jsonData</span> <span class="o">=</span> <span class="n">pm</span><span class="o">.</span><span class="n">response</span><span class="o">.</span><span class="n">json</span><span class="p">();</span>
+    <span class="n">pm</span><span class="o">.</span><span class="n">expect</span><span class="p">(</span><span class="n">jsonData</span><span class="o">.</span><span class="n">name</span><span class="p">)</span><span class="o">.</span><span class="n">to</span><span class="o">.</span><span class="n">eql</span><span class="p">(</span><span class="s1">&#39;John&#39;</span><span class="p">);</span>
+    <span class="n">pm</span><span class="o">.</span><span class="n">globals</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="s1">&#39;name&#39;</span><span class="p">,</span> <span class="n">jsonData</span><span class="o">.</span><span class="n">name</span><span class="p">);</span> <span class="o">//</span> <span class="o">&lt;--</span> <span class="n">usage</span> <span class="n">inside</span> <span class="n">callback</span>
+<span class="p">});</span>
+</pre></div>
+</div>
+</li>
+</ol>
+<p>Hope this helps and clarifies a bit the error.</p>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">Assertions</a><ul>
+<li><a class="reference internal" href="#how-find-object-in-array-by-property-value">How find object in array by property value?</a></li>
+<li><a class="reference internal" href="#how-to-compare-value-of-a-response-with-an-already-defined-variable">How to compare value of a response with an already defined variable?</a></li>
+<li><a class="reference internal" href="#how-to-compare-value-of-a-response-against-multiple-valid-values">How to compare value of a response against multiple valid values?</a></li>
+<li><a class="reference internal" href="#how-to-parse-a-html-response-to-extract-a-specific-value">How to parse a HTML response to extract a specific value?</a></li>
+<li><a class="reference internal" href="#how-to-fix-the-error-referenceerror-jsondata-is-not-defined">How to fix the error “ReferenceError: jsonData is not defined”?</a></li>
+</ul>
+</li>
+</ul>
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="index.html">Documentation overview</a><ul>
+      <li>Previous: <a href="request-creation.html" title="previous chapter">Request creation</a></li>
+      <li>Next: <a href="workflows.html" title="next chapter">Workflows</a></li>
+  </ul></li>
+</ul>
+</div>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="_sources/assertions.rst.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    </div>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2018, Valentin Despa.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 1.7.0</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.10</a>
+      
+      |
+      <a href="_sources/assertions.rst.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>

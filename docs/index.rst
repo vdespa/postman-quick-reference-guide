@@ -11,7 +11,10 @@ Welcome to Postman Quick Reference Guide's documentation!
    :caption: Contents:
 
    cheatsheet
-
+   request-creation
+   assertions
+   workflows
+   newman
 
 
 Indices and tables

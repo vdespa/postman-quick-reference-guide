@@ -1,0 +1,367 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+        <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>Postman Cheatsheet &#8212; Postman Quick Reference Guide February 2018 documentation</title>
+    <link rel="stylesheet" href="_static/alabaster.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <script type="text/javascript" src="_static/documentation_options.js"></script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="&lt;no title&gt;" href="assertions.html" />
+    <link rel="prev" title="Welcome to Postman Quick Reference Guide’s documentation!" href="index.html" />
+   
+  <link rel="stylesheet" href="_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="postman-cheatsheet">
+<h1>Postman Cheatsheet<a class="headerlink" href="#postman-cheatsheet" title="Permalink to this headline">¶</a></h1>
+<p>Thank you for downloading this cheat sheet. This guide refers to the Postman App, not the Chrome extension. Please report any problems with it.</p>
+<p>Postman Cheat Sheet is based on the official Postman documentation and own experience.</p>
+<p>For a detailed documentation on each feature, check out <a class="reference external" href="https://www.getpostman.com/docs">https://www.getpostman.com/docs</a>.</p>
+<div class="section" id="variables">
+<h2>Variables<a class="headerlink" href="#variables" title="Permalink to this headline">¶</a></h2>
+<p>Code snippets for working with variables in scripts (pre-request, tests).</p>
+<div class="section" id="setting-variables">
+<h3>Setting variables<a class="headerlink" href="#setting-variables" title="Permalink to this headline">¶</a></h3>
+<p><strong>Global variable</strong></p>
+<div class="highlight-javascript notranslate"><div class="highlight"><pre><span></span><span class="nx">pm</span><span class="p">.</span><span class="nx">globals</span><span class="p">.</span><span class="nx">set</span><span class="p">(</span><span class="s1">&#39;myVariable&#39;</span><span class="p">,</span> <span class="nx">MY_VALUE</span><span class="p">);</span>
+</pre></div>
+</div>
+<p><strong>Collection variable</strong></p>
+<blockquote>
+<div>Can only be set from Postman (at this moment).</div></blockquote>
+<p><strong>Environment variable</strong></p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">pm</span><span class="o">.</span><span class="n">environment</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="s1">&#39;myVariable&#39;</span><span class="p">,</span> <span class="n">MY_VALUE</span><span class="p">);</span>
+</pre></div>
+</div>
+<p><strong>Data variable</strong></p>
+<blockquote>
+<div>Can only be set from a CSV or a JSON file.</div></blockquote>
+<p><strong>Local variable</strong></p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">var</span> <span class="n">myVar</span> <span class="o">=</span> <span class="n">MY_VALUE</span><span class="p">;</span>
+</pre></div>
+</div>
+<p>Examples:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">pm</span><span class="o">.</span><span class="n">globals</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="s1">&#39;name&#39;</span><span class="p">,</span> <span class="s1">&#39;John Doe&#39;</span><span class="p">);</span>
+<span class="n">pm</span><span class="o">.</span><span class="n">environment</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="s1">&#39;age&#39;</span><span class="p">,</span> <span class="mi">29</span><span class="p">);</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="getting-variables">
+<h3>Getting variables<a class="headerlink" href="#getting-variables" title="Permalink to this headline">¶</a></h3>
+<p><strong>Request builder</strong></p>
+<p>Syntax: <code class="docutils literal notranslate"><span class="pre">{{myVariable}}</span></code></p>
+<p>Request URL: <code class="docutils literal notranslate"><span class="pre">http://{{domain}}/users/{{userId}}</span></code></p>
+<p>Headers (key:value): X-{{myHeaderName}}:foo</p>
+<p>Body: <code class="docutils literal notranslate"><span class="pre">{&quot;id&quot;:</span> <span class="pre">&quot;{{userId}}&quot;,</span> <span class="pre">&quot;name&quot;:</span> <span class="pre">&quot;John</span> <span class="pre">Doe&quot;}</span></code></p>
+<p><strong>Depending on the matching scope</strong></p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">pm</span><span class="o">.</span><span class="n">variables</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;myVariable&#39;</span><span class="p">);</span>
+</pre></div>
+</div>
+<p><strong>Global variable</strong></p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">pm</span><span class="o">.</span><span class="n">globals</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;myVariable&#39;</span><span class="p">);</span>
+</pre></div>
+</div>
+<p><strong>Collection variable</strong></p>
+<blockquote>
+<div>Can only be used in the Request Builder (at this moment). Syntax: <code class="docutils literal notranslate"><span class="pre">{{myVariable}}</span></code></div></blockquote>
+<p><strong>Environment variable</strong></p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">pm</span><span class="o">.</span><span class="n">environment</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;myVariable&#39;</span><span class="p">);</span>
+</pre></div>
+</div>
+<p><strong>Data variable</strong></p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">pm</span><span class="o">.</span><span class="n">iterationData</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;myVariable);</span>
+</pre></div>
+</div>
+<p><strong>Local variable</strong></p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">myVar</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="removing-variables">
+<h3>Removing variables<a class="headerlink" href="#removing-variables" title="Permalink to this headline">¶</a></h3>
+<p><strong>Global variable</strong></p>
+<p>Remove one variable</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">pm</span><span class="o">.</span><span class="n">globals</span><span class="o">.</span><span class="n">unset</span><span class="p">(</span><span class="s1">&#39;myVariable&#39;</span><span class="p">);</span>
+</pre></div>
+</div>
+<p>Remove ALL global variables</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">pm</span><span class="o">.</span><span class="n">globals</span><span class="o">.</span><span class="n">clear</span><span class="p">();</span>
+</pre></div>
+</div>
+<p><strong>Environment variable</strong></p>
+<p>Remove one variable</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">pm</span><span class="o">.</span><span class="n">environment</span><span class="o">.</span><span class="n">unset</span><span class="p">(</span><span class="s2">&quot;myVariable&quot;</span><span class="p">);</span>
+</pre></div>
+</div>
+<p>Remove ALL environment variables</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">pm</span><span class="o">.</span><span class="n">environment</span><span class="o">.</span><span class="n">clear</span><span class="p">();</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="dynamic-variables">
+<h3>DYNAMIC VARIABLES<a class="headerlink" href="#dynamic-variables" title="Permalink to this headline">¶</a></h3>
+<p><strong>Experimental feature</strong>. Can only be used in request builder. Only one value is generated per request.</p>
+<p>All dynamic variables can be combined with strings, in order to generate dynamic / unique data.</p>
+<p>Example JSON body:</p>
+<div class="highlight-json notranslate"><div class="highlight"><pre><span></span><span class="p">{</span><span class="nt">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;John Doe&quot;</span><span class="p">,</span> <span class="nt">&quot;email&quot;</span><span class="p">:</span> <span class="s2">&quot;john.doe.{{$timestamp}}@example.com&quot;</span><span class="p">}</span>
+</pre></div>
+</div>
+<p><code class="docutils literal notranslate"><span class="pre">{{$guid}}</span></code> - global unique identifier.</p>
+<p>Example output: <code class="docutils literal notranslate"><span class="pre">d96d398a-b655-4638-a6e5-40c0dc282fb7</span></code></p>
+<p><code class="docutils literal notranslate"><span class="pre">{{$timestamp}}</span></code> - current timestamp.</p>
+<p>Example output: <cite>1507370977`</cite></p>
+<p><code class="docutils literal notranslate"><span class="pre">{{$randomInt}}</span></code> - random integer between 0 and 1000.</p>
+<p>Example output: <code class="docutils literal notranslate"><span class="pre">567</span></code></p>
+</div>
+<div class="section" id="logging-debugging-variables">
+<h3>LOGGING / DEBUGGING VARIABLES<a class="headerlink" href="#logging-debugging-variables" title="Permalink to this headline">¶</a></h3>
+<p>Open Postman Console and use <cite>console.log</cite> in your test or pre-request script.</p>
+<p>Example:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">var</span> <span class="n">myVar</span> <span class="o">=</span> <span class="n">pm</span><span class="o">.</span><span class="n">globals</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;myVar&quot;</span><span class="p">);</span>
+<span class="n">console</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">myVar</span><span class="p">);</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="assertions">
+<h2>Assertions<a class="headerlink" href="#assertions" title="Permalink to this headline">¶</a></h2>
+<p>Note: You need to add any of the assertions inside a <code class="docutils literal notranslate"><span class="pre">pm.test</span></code> callback.</p>
+<p>Example:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">pm</span><span class="o">.</span><span class="n">test</span><span class="p">(</span><span class="s2">&quot;Your test name&quot;</span><span class="p">,</span> <span class="n">function</span> <span class="p">()</span> <span class="p">{</span>
+    <span class="n">var</span> <span class="n">jsonData</span> <span class="o">=</span> <span class="n">pm</span><span class="o">.</span><span class="n">response</span><span class="o">.</span><span class="n">json</span><span class="p">();</span>
+    <span class="n">pm</span><span class="o">.</span><span class="n">expect</span><span class="p">(</span><span class="n">jsonData</span><span class="o">.</span><span class="n">value</span><span class="p">)</span><span class="o">.</span><span class="n">to</span><span class="o">.</span><span class="n">eql</span><span class="p">(</span><span class="mi">100</span><span class="p">);</span>
+<span class="p">});</span>
+</pre></div>
+</div>
+<div class="section" id="status-code">
+<h3>Status code<a class="headerlink" href="#status-code" title="Permalink to this headline">¶</a></h3>
+<p>Check if status code is 200:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">pm</span><span class="o">.</span><span class="n">response</span><span class="o">.</span><span class="n">to</span><span class="o">.</span><span class="n">have</span><span class="o">.</span><span class="n">status</span><span class="p">(</span><span class="mi">200</span><span class="p">);</span>
+</pre></div>
+</div>
+<p>Checking multiple status codes:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">pm</span><span class="o">.</span><span class="n">expect</span><span class="p">(</span><span class="n">pm</span><span class="o">.</span><span class="n">response</span><span class="o">.</span><span class="n">code</span><span class="p">)</span><span class="o">.</span><span class="n">to</span><span class="o">.</span><span class="n">be</span><span class="o">.</span><span class="n">oneOf</span><span class="p">([</span><span class="mi">201</span><span class="p">,</span><span class="mi">202</span><span class="p">]);</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="response-time">
+<h3>Response time<a class="headerlink" href="#response-time" title="Permalink to this headline">¶</a></h3>
+<p>Response time below 100ms:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">pm</span><span class="o">.</span><span class="n">expect</span><span class="p">(</span><span class="n">pm</span><span class="o">.</span><span class="n">response</span><span class="o">.</span><span class="n">responseTime</span><span class="p">)</span><span class="o">.</span><span class="n">to</span><span class="o">.</span><span class="n">be</span><span class="o">.</span><span class="n">below</span><span class="p">(</span><span class="mi">9</span><span class="p">);</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="headers">
+<h3>Headers<a class="headerlink" href="#headers" title="Permalink to this headline">¶</a></h3>
+<p>Header exists:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">pm</span><span class="o">.</span><span class="n">response</span><span class="o">.</span><span class="n">to</span><span class="o">.</span><span class="n">have</span><span class="o">.</span><span class="n">header</span><span class="p">(</span><span class="n">X</span><span class="o">-</span><span class="n">Cache</span><span class="s1">&#39;);</span>
+</pre></div>
+</div>
+<p>Header has value:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">pm</span><span class="o">.</span><span class="n">expect</span><span class="p">(</span><span class="n">pm</span><span class="o">.</span><span class="n">response</span><span class="o">.</span><span class="n">headers</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;X-Cache&#39;</span><span class="p">))</span><span class="o">.</span><span class="n">to</span><span class="o">.</span><span class="n">eql</span><span class="p">(</span><span class="s1">&#39;HIT&#39;</span><span class="p">);</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="cookies">
+<h3>Cookies<a class="headerlink" href="#cookies" title="Permalink to this headline">¶</a></h3>
+<p>Cookie exists:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">pm</span><span class="o">.</span><span class="n">expect</span><span class="p">(</span><span class="n">pm</span><span class="o">.</span><span class="n">cookies</span><span class="o">.</span><span class="n">has</span><span class="p">(</span><span class="s1">&#39;sessionId&#39;</span><span class="p">))</span><span class="o">.</span><span class="n">to</span><span class="o">.</span><span class="n">be</span><span class="o">.</span><span class="n">true</span><span class="p">;</span>
+</pre></div>
+</div>
+<p>Cookie has value:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>pm.expect(pm.cookies.get(&#39;sessionId&#39;)).to.eql(’ad3se3ss8sg7sg3&#39;);
+</pre></div>
+</div>
+</div>
+<div class="section" id="body">
+<h3>Body<a class="headerlink" href="#body" title="Permalink to this headline">¶</a></h3>
+<p><strong>Any content type / HTML responses</strong></p>
+<p>Exact body match:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">pm</span><span class="o">.</span><span class="n">response</span><span class="o">.</span><span class="n">to</span><span class="o">.</span><span class="n">have</span><span class="o">.</span><span class="n">body</span><span class="p">(</span><span class="s2">&quot;OK&quot;</span><span class="p">);</span>
+<span class="n">pm</span><span class="o">.</span><span class="n">response</span><span class="o">.</span><span class="n">to</span><span class="o">.</span><span class="n">have</span><span class="o">.</span><span class="n">body</span><span class="p">(</span><span class="s1">&#39;{&quot;success&quot;=true});</span>
+</pre></div>
+</div>
+<p>Partial body match / body contains:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">pm</span><span class="o">.</span><span class="n">expect</span><span class="p">(</span><span class="n">pm</span><span class="o">.</span><span class="n">response</span><span class="o">.</span><span class="n">text</span><span class="p">())</span><span class="o">.</span><span class="n">to</span><span class="o">.</span><span class="n">include</span><span class="p">(</span><span class="s1">&#39;Order placed.);</span>
+</pre></div>
+</div>
+<p><strong>JSON responses</strong></p>
+<p>Parse body (need for all assertions):</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">var</span> <span class="n">jsonData</span> <span class="o">=</span> <span class="n">pm</span><span class="o">.</span><span class="n">response</span><span class="o">.</span><span class="n">json</span><span class="p">();</span>
+</pre></div>
+</div>
+<p>Simple value check:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">pm</span><span class="o">.</span><span class="n">expect</span><span class="p">(</span><span class="n">jsonData</span><span class="o">.</span><span class="n">age</span><span class="p">)</span><span class="o">.</span><span class="n">to</span><span class="o">.</span><span class="n">eql</span><span class="p">(</span><span class="mi">30</span><span class="p">);</span>
+<span class="n">pm</span><span class="o">.</span><span class="n">expect</span><span class="p">(</span><span class="n">jsonData</span><span class="o">.</span><span class="n">name</span><span class="p">)</span><span class="o">.</span><span class="n">to</span><span class="o">.</span><span class="n">eql</span><span class="p">(</span><span class="s1">&#39;John);</span>
+</pre></div>
+</div>
+<p>Nested value check:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">pm</span><span class="o">.</span><span class="n">expect</span><span class="p">(</span><span class="n">jsonData</span><span class="o">.</span><span class="n">products</span><span class="o">.</span><span class="mf">0.</span><span class="n">category</span><span class="p">)</span><span class="o">.</span><span class="n">to</span><span class="o">.</span><span class="n">eql</span><span class="p">(</span><span class="s1">&#39;Detergent&#39;</span><span class="p">);</span>
+</pre></div>
+</div>
+<p><strong>XML responses</strong></p>
+<p>Convert XML body to JSON:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">var</span> <span class="n">jsonData</span> <span class="o">=</span> <span class="n">xml2Json</span><span class="p">(</span><span class="n">responseBody</span><span class="p">);</span>
+</pre></div>
+</div>
+<p>Note: see assertions for JSON responses.</p>
+</div>
+</div>
+<div class="section" id="postman-sandbox">
+<h2>Postman Sandbox<a class="headerlink" href="#postman-sandbox" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="pm">
+<h3>pm<a class="headerlink" href="#pm" title="Permalink to this headline">¶</a></h3>
+<p>this is the object containing the script that is running, can access variables and has access to a read-only copy of the request or response.</p>
+</div>
+<div class="section" id="pm-sendrequest">
+<h3>pm.sendRequest<a class="headerlink" href="#pm-sendrequest" title="Permalink to this headline">¶</a></h3>
+<p>Allows to send simple HTTP(S) GET requests from tests and pre-request scripts. Example:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>pm.sendRequest(&#39;http://example.com&#39;, function (err, res) {
+    console.log(err ? err : res.json());
+});
+</pre></div>
+</div>
+<p>Full-option HTTP(S) request:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>const postRequest = {
+    url: &#39;http://example.com&#39;, method: &#39;POST&#39;,
+    header: &#39;X-Foo:foo&#39;,
+    body: {
+        mode: &#39;raw&#39;,
+        raw: JSON.stringify({ name: &#39;John&#39; })
+    }
+};
+pm.sendRequest(postRequest, function (err, res) {
+    console.log(err ? err : res.json());
+});
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="postman-echo">
+<h2>Postman Echo<a class="headerlink" href="#postman-echo" title="Permalink to this headline">¶</a></h2>
+<p>Helper API for testing requests. Read more at: <a class="reference external" href="https://docs.postman-echo.com">https://docs.postman-echo.com</a>.</p>
+<p><strong>Get Current UTC time in pre-request script</strong></p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">pm</span><span class="o">.</span><span class="n">sendRequest</span><span class="p">(</span><span class="s1">&#39;https://postman-echo.com/time/now&#39;</span><span class="p">,</span> <span class="n">function</span> <span class="p">(</span><span class="n">err</span><span class="p">,</span> <span class="n">res</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">if</span> <span class="p">(</span><span class="n">err</span><span class="p">)</span> <span class="p">{</span> <span class="n">console</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">err</span><span class="p">);</span> <span class="p">}</span>
+    <span class="k">else</span> <span class="p">{</span>
+        <span class="n">var</span> <span class="n">currentTime</span> <span class="o">=</span> <span class="n">res</span><span class="o">.</span><span class="n">stream</span><span class="o">.</span><span class="n">toString</span><span class="p">();</span>
+        <span class="n">console</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">currentTime</span><span class="p">);</span>
+        <span class="n">pm</span><span class="o">.</span><span class="n">environment</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="s2">&quot;currentTime&quot;</span><span class="p">,</span> <span class="n">currentTime</span><span class="p">);</span>
+    <span class="p">}</span>
+<span class="p">});</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="workflows">
+<h2>Workflows<a class="headerlink" href="#workflows" title="Permalink to this headline">¶</a></h2>
+<p>Only work with automated collection runs such as with the Collection Runner or Newman.</p>
+<p><strong>Set which will be the next request to be executed</strong></p>
+<p><code class="docutils literal notranslate"><span class="pre">postman.setNextRequest(“Request</span> <span class="pre">name&quot;);</span></code></p>
+<p><strong>Stop executing requests / stop the collection run</strong></p>
+<p><code class="docutils literal notranslate"><span class="pre">postman.setNextRequest(null);</span></code></p>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">Postman Cheatsheet</a><ul>
+<li><a class="reference internal" href="#variables">Variables</a><ul>
+<li><a class="reference internal" href="#setting-variables">Setting variables</a></li>
+<li><a class="reference internal" href="#getting-variables">Getting variables</a></li>
+<li><a class="reference internal" href="#removing-variables">Removing variables</a></li>
+<li><a class="reference internal" href="#dynamic-variables">DYNAMIC VARIABLES</a></li>
+<li><a class="reference internal" href="#logging-debugging-variables">LOGGING / DEBUGGING VARIABLES</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#assertions">Assertions</a><ul>
+<li><a class="reference internal" href="#status-code">Status code</a></li>
+<li><a class="reference internal" href="#response-time">Response time</a></li>
+<li><a class="reference internal" href="#headers">Headers</a></li>
+<li><a class="reference internal" href="#cookies">Cookies</a></li>
+<li><a class="reference internal" href="#body">Body</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#postman-sandbox">Postman Sandbox</a><ul>
+<li><a class="reference internal" href="#pm">pm</a></li>
+<li><a class="reference internal" href="#pm-sendrequest">pm.sendRequest</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#postman-echo">Postman Echo</a></li>
+<li><a class="reference internal" href="#workflows">Workflows</a></li>
+</ul>
+</li>
+</ul>
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="index.html">Documentation overview</a><ul>
+      <li>Previous: <a href="index.html" title="previous chapter">Welcome to Postman Quick Reference Guide’s documentation!</a></li>
+      <li>Next: <a href="assertions.html" title="next chapter">&lt;no title&gt;</a></li>
+  </ul></li>
+</ul>
+</div>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="_sources/cheatsheet.rst.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    </div>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2018, Valentin Despa.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 1.7.0</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.10</a>
+      
+      |
+      <a href="_sources/cheatsheet.rst.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>
