@@ -14,20 +14,47 @@ Cheatsheet
 
 .. toctree::
    :maxdepth: 2
-   :caption: XXXX:
-
-   cheatsheet
-
-Foo
----
-
-.. toctree::
-   :maxdepth: 2
    :caption: Contents:
 
    cheatsheet
+
+Request creation
+----------------
+
+.. toctree::
+   :maxdepth: 2
+
    request-creation
+
+Assertions
+----------
+
+.. toctree::
+   :maxdepth: 2
+
    assertions
+
+Workflows
+---------
+
+.. toctree::
+   :maxdepth: 2
+
    workflows
+
+Newman
+------
+
+.. toctree::
+   :maxdepth: 2
+
    newman
+
+Online course
+---------------
+
+.. toctree::
+   :maxdepth: 2
+   :caption: Additional resourses:
+
    course
