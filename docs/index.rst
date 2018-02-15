@@ -19,3 +19,4 @@ Simple solutions to common problems
    assertions
    workflows
    newman
+   course
