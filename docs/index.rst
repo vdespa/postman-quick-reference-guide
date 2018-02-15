@@ -6,6 +6,10 @@
 Welcome to Postman Quick Reference Guide's documentation!
 =========================================================
 
+
+Simple solutions to common problems
+-----------------------------------
+
 .. toctree::
    :maxdepth: 2
    :caption: Contents:
@@ -15,11 +19,3 @@ Welcome to Postman Quick Reference Guide's documentation!
    assertions
    workflows
    newman
-
-
-Indices and tables
-==================
-
-* :ref:`genindex`
-* :ref:`modindex`
-* :ref:`search`
