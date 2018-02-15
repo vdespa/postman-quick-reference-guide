@@ -1,5 +1,5 @@
 ************************
->> Postman online course
+Postman online course
 ************************
 
 This document is part of the online course "Postman: The Complete Guide". 

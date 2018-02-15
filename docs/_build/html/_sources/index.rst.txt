@@ -6,9 +6,6 @@
 Welcome to Postman Quick Reference Guide's documentation!
 =========================================================
 
-.. Simple solutions to common problems
-
-
 Cheatsheet
 ----------
 
@@ -18,36 +15,15 @@ Cheatsheet
 
    cheatsheet
 
-Request creation
-----------------
+Simple solutions to common problems 
+-----------------------------------
 
 .. toctree::
    :maxdepth: 2
 
    request-creation
-
-Assertions
-----------
-
-.. toctree::
-   :maxdepth: 2
-
    assertions
-
-Workflows
----------
-
-.. toctree::
-   :maxdepth: 2
-
    workflows
-
-Newman
-------
-
-.. toctree::
-   :maxdepth: 2
-
    newman
 
 Online course
