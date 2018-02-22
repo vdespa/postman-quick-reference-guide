@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Assertions &mdash; Postman Quick Reference Guide Preview - February 2018 documentation</title>
+  <title>Assertions &mdash; Postman Quick Reference Guide Version 1.0.0 - February 2018 documentation</title>
   
 
   
@@ -35,7 +35,7 @@
         <link rel="index" title="Index"
               href="genindex.html"/>
         <link rel="search" title="Search" href="search.html"/>
-    <link rel="top" title="Postman Quick Reference Guide Preview - February 2018 documentation" href="index.html"/>
+    <link rel="top" title="Postman Quick Reference Guide Version 1.0.0 - February 2018 documentation" href="index.html"/>
         <link rel="next" title="Workflows" href="workflows.html"/>
         <link rel="prev" title="Request creation" href="request-creation.html"/> 
 
@@ -87,20 +87,27 @@
             
             
               <p class="caption"><span class="caption-text">Contents:</span></p>
-<ul class="current">
+<ul>
 <li class="toctree-l1"><a class="reference internal" href="cheatsheet.html">Postman Cheatsheet</a></li>
+</ul>
+<ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="request-creation.html">Request creation</a></li>
 <li class="toctree-l1 current"><a class="current reference internal" href="#">Assertions</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="#how-find-object-in-array-by-property-value">How find object in array by property value?</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#how-find-nested-object-by-object-name">How find nested object by object name?</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#how-to-compare-value-of-a-response-with-an-already-defined-variable">How to compare value of a response with an already defined variable?</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#how-to-compare-value-of-a-response-against-multiple-valid-values">How to compare value of a response against multiple valid values?</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#how-to-parse-a-html-response-to-extract-a-specific-value">How to parse a HTML response to extract a specific value?</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#how-to-fix-the-error-referenceerror-jsondata-is-not-defined">How to fix the error “ReferenceError: jsonData is not defined”?</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#how-to-do-a-partial-object-match-assertion">How to do a partial object match assertion?</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="workflows.html">Workflows</a></li>
 <li class="toctree-l1"><a class="reference internal" href="newman.html">Newman</a></li>
-<li class="toctree-l1"><a class="reference internal" href="course.html">&gt;&gt; Postman online course</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Additional resourses:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="course.html">Postman online course</a></li>
 </ul>
 
             
@@ -214,6 +221,62 @@ You can read an extensive documentation on Chai by visiting <a class="reference 
 
     <span class="o">//</span> <span class="n">Check</span> <span class="n">that</span> <span class="n">the</span> <span class="n">country</span> <span class="nb">filter</span> <span class="ow">is</span> <span class="n">allowed</span>
     <span class="n">pm</span><span class="o">.</span><span class="n">expect</span><span class="p">(</span><span class="n">countryFilter</span><span class="o">.</span><span class="n">isAllowed</span><span class="p">)</span><span class="o">.</span><span class="n">to</span><span class="o">.</span><span class="n">be</span><span class="o">.</span><span class="n">true</span><span class="p">;</span>
+<span class="p">});</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="how-find-nested-object-by-object-name">
+<h2>How find nested object by object name?<a class="headerlink" href="#how-find-nested-object-by-object-name" title="Permalink to this headline">¶</a></h2>
+<p>Given the following response:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
+    <span class="s2">&quot;id&quot;</span><span class="p">:</span> <span class="s2">&quot;5a866bd667ff15546b84ab78&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;limits&quot;</span><span class="p">:</span> <span class="p">{</span>
+        <span class="s2">&quot;59974328d59230f9a3f946fe&quot;</span><span class="p">:</span> <span class="p">{</span>
+            <span class="s2">&quot;lists&quot;</span><span class="p">:</span> <span class="p">{</span>
+                <span class="s2">&quot;openPerBoard&quot;</span><span class="p">:</span> <span class="p">{</span>
+                    <span class="s2">&quot;count&quot;</span><span class="p">:</span> <span class="mi">13</span><span class="p">,</span>
+                    <span class="s2">&quot;status&quot;</span><span class="p">:</span> <span class="s2">&quot;ok&quot;</span><span class="p">,</span> <span class="o">&lt;--</span> <span class="n">CHECK</span> <span class="n">ME</span>
+                    <span class="s2">&quot;disableAt&quot;</span><span class="p">:</span> <span class="mi">950</span><span class="p">,</span>
+                    <span class="s2">&quot;warnAt&quot;</span><span class="p">:</span> <span class="mi">900</span>
+                <span class="p">},</span>
+                <span class="s2">&quot;totalPerBoard&quot;</span><span class="p">:</span> <span class="p">{</span>
+                    <span class="s2">&quot;count&quot;</span><span class="p">:</span> <span class="mi">20</span><span class="p">,</span>
+                    <span class="s2">&quot;status&quot;</span><span class="p">:</span> <span class="s2">&quot;ok&quot;</span><span class="p">,</span>  <span class="o">&lt;--</span> <span class="n">CHECK</span> <span class="n">ME</span>
+                    <span class="s2">&quot;disableAt&quot;</span><span class="p">:</span> <span class="mi">950</span><span class="p">,</span>
+                    <span class="s2">&quot;warnAt&quot;</span><span class="p">:</span> <span class="mi">900</span>
+                <span class="p">}</span>
+            <span class="p">}</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>You want to check the value of the <cite>status</cite> in both objects (openPerBoard, totalPerBoard). The problem is that in order to each both objects you need first to reach the lists object, which itself is a property of a randomly named object (59974328d59230f9a3f946fe).</p>
+<p>So we could write the whole path <code class="docutils literal notranslate"><span class="pre">limits.59974328d59230f9a3f946fe.lists.openPerBoard.status</span></code> but this will probably work only once.</p>
+<p>For that reason it is first needed to search inside the <code class="docutils literal notranslate"><span class="pre">limits</span></code> object for the <code class="docutils literal notranslate"><span class="pre">lists</span></code> object. In order to make the code more readable, we will create a function for that:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">function</span> <span class="n">findObjectContaininsLists</span><span class="p">(</span><span class="n">limits</span><span class="p">)</span> <span class="p">{</span>
+    <span class="o">//</span> <span class="n">Iterate</span> <span class="n">over</span> <span class="n">the</span> <span class="n">properties</span> <span class="p">(</span><span class="n">keys</span><span class="p">)</span> <span class="ow">in</span> <span class="n">the</span> <span class="nb">object</span>
+    <span class="k">for</span> <span class="p">(</span><span class="n">var</span> <span class="n">key</span> <span class="ow">in</span> <span class="n">limits</span><span class="p">)</span> <span class="p">{</span>
+        <span class="o">//</span> <span class="n">console</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">key</span><span class="p">,</span> <span class="n">limits</span><span class="p">[</span><span class="n">key</span><span class="p">]);</span>
+        <span class="o">//</span> <span class="n">If</span> <span class="n">the</span> <span class="nb">property</span> <span class="ow">is</span> <span class="n">lists</span><span class="p">,</span> <span class="k">return</span> <span class="n">the</span> <span class="n">lists</span> <span class="nb">object</span>
+        <span class="k">if</span> <span class="p">(</span><span class="n">limits</span><span class="p">[</span><span class="n">key</span><span class="p">]</span><span class="o">.</span><span class="n">hasOwnProperty</span><span class="p">(</span><span class="s1">&#39;lists&#39;</span><span class="p">))</span> <span class="p">{</span>
+            <span class="o">//</span> <span class="n">console</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">limits</span><span class="p">[</span><span class="n">key</span><span class="p">]</span><span class="o">.</span><span class="n">lists</span><span class="p">);</span>
+            <span class="k">return</span> <span class="n">limits</span><span class="p">[</span><span class="n">key</span><span class="p">]</span><span class="o">.</span><span class="n">lists</span><span class="p">;</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>The function will iterate over the limits array to see if any object contains a <code class="docutils literal notranslate"><span class="pre">lists</span></code> object.</p>
+<p>Next all we need to do is to call the function and the assertions will be trivial:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">pm</span><span class="o">.</span><span class="n">test</span><span class="p">(</span><span class="s2">&quot;Check status&quot;</span><span class="p">,</span> <span class="n">function</span> <span class="p">()</span> <span class="p">{</span>
+    <span class="o">//</span> <span class="n">Parse</span> <span class="n">JSON</span> <span class="n">body</span>
+    <span class="n">var</span> <span class="n">jsonData</span> <span class="o">=</span> <span class="n">pm</span><span class="o">.</span><span class="n">response</span><span class="o">.</span><span class="n">json</span><span class="p">();</span>
+
+    <span class="o">//</span> <span class="n">Retrieve</span> <span class="n">the</span> <span class="n">lists</span> <span class="nb">object</span>
+    <span class="n">var</span> <span class="n">lists</span> <span class="o">=</span> <span class="n">findObjectContaininsLists</span><span class="p">(</span><span class="n">jsonData</span><span class="o">.</span><span class="n">limits</span><span class="p">);</span>
+    <span class="n">pm</span><span class="o">.</span><span class="n">expect</span><span class="p">(</span><span class="n">lists</span><span class="o">.</span><span class="n">openPerBoard</span><span class="o">.</span><span class="n">status</span><span class="p">)</span><span class="o">.</span><span class="n">to</span><span class="o">.</span><span class="n">eql</span><span class="p">(</span><span class="s1">&#39;ok&#39;</span><span class="p">);</span>
+    <span class="n">pm</span><span class="o">.</span><span class="n">expect</span><span class="p">(</span><span class="n">lists</span><span class="o">.</span><span class="n">totalPerBoard</span><span class="o">.</span><span class="n">status</span><span class="p">)</span><span class="o">.</span><span class="n">to</span><span class="o">.</span><span class="n">eql</span><span class="p">(</span><span class="s1">&#39;ok&#39;</span><span class="p">);</span>
 <span class="p">});</span>
 </pre></div>
 </div>
@@ -336,6 +399,36 @@ You can read an extensive documentation on Chai by visiting <a class="reference 
 </ol>
 <p>Hope this helps and clarifies a bit the error.</p>
 </div>
+<div class="section" id="how-to-do-a-partial-object-match-assertion">
+<h2>How to do a partial object match assertion?<a class="headerlink" href="#how-to-do-a-partial-object-match-assertion" title="Permalink to this headline">¶</a></h2>
+<p>Given the reponse:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
+    <span class="s2">&quot;uid&quot;</span><span class="p">:</span> <span class="s2">&quot;12344&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;pid&quot;</span><span class="p">:</span> <span class="s2">&quot;8896&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;firstName&quot;</span><span class="p">:</span> <span class="s2">&quot;Jane&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;lastName&quot;</span><span class="p">:</span> <span class="s2">&quot;Doe&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;companyName&quot;</span><span class="p">:</span> <span class="s2">&quot;ACME&quot;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>You want to assert that a part of the reponse has a specific value. For example you are not interested in the dynamic value of uid and pid but you want to assert firstName, lastName and companyName.</p>
+<p>You can do a partial match of the response by using the <code class="docutils literal notranslate"><span class="pre">to.include</span></code> expression. Optionally you can check the existence of the additional properties without checking the value.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">pm</span><span class="o">.</span><span class="n">test</span><span class="p">(</span><span class="s2">&quot;Should include object&quot;</span><span class="p">,</span> <span class="n">function</span> <span class="p">()</span> <span class="p">{</span>
+    <span class="n">var</span> <span class="n">jsonData</span> <span class="o">=</span> <span class="n">pm</span><span class="o">.</span><span class="n">response</span><span class="o">.</span><span class="n">json</span><span class="p">();</span>
+    <span class="n">var</span> <span class="n">expectedObject</span> <span class="o">=</span> <span class="p">{</span>
+        <span class="s2">&quot;firstName&quot;</span><span class="p">:</span> <span class="s2">&quot;Jane&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;lastName&quot;</span><span class="p">:</span> <span class="s2">&quot;Doe&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;companyName&quot;</span><span class="p">:</span> <span class="s2">&quot;ACME&quot;</span>
+    <span class="p">}</span>
+    <span class="n">pm</span><span class="o">.</span><span class="n">expect</span><span class="p">(</span><span class="n">jsonData</span><span class="p">)</span><span class="o">.</span><span class="n">to</span><span class="o">.</span><span class="n">include</span><span class="p">(</span><span class="n">expectedObject</span><span class="p">);</span>
+
+    <span class="o">//</span> <span class="n">Optional</span> <span class="n">check</span> <span class="k">if</span> <span class="n">properties</span> <span class="n">actually</span> <span class="n">exist</span>
+    <span class="n">pm</span><span class="o">.</span><span class="n">expect</span><span class="p">(</span><span class="n">jsonData</span><span class="p">)</span><span class="o">.</span><span class="n">to</span><span class="o">.</span><span class="n">have</span><span class="o">.</span><span class="n">property</span><span class="p">(</span><span class="s1">&#39;uid&#39;</span><span class="p">);</span>
+    <span class="n">pm</span><span class="o">.</span><span class="n">expect</span><span class="p">(</span><span class="n">jsonData</span><span class="p">)</span><span class="o">.</span><span class="n">to</span><span class="o">.</span><span class="n">have</span><span class="o">.</span><span class="n">property</span><span class="p">(</span><span class="s1">&#39;pid&#39;</span><span class="p">);</span>
+<span class="p">});</span>
+</pre></div>
+</div>
+</div>
 </div>
 
 
@@ -382,7 +475,7 @@ You can read an extensive documentation on Chai by visiting <a class="reference 
     <script type="text/javascript">
         var DOCUMENTATION_OPTIONS = {
             URL_ROOT:'./',
-            VERSION:'Preview - February 2018',
+            VERSION:'Version 1.0.0 - February 2018',
             COLLAPSE_INDEX:false,
             FILE_SUFFIX:'.html',
             HAS_SOURCE:  true,

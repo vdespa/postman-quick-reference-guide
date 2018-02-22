@@ -83,11 +83,18 @@ The disadvantage of this method is that you cannot use these special variables i
 
 **Option 2** Using existing JavaScript random generators
 
-TODO
+Below you will find an exemple function that you can use to generate integer number between a specific interval: ::
+
+    function getRandomNumber(minValue, maxValue) {
+        return Math.floor(Math.random() * (maxValue - minValue +1)) + min;
+    }
+
+You can call the function like this: ::
+
+    var myRandomNumber = getRandomNumber(0, 100);
 
 
-
-How to trigger another another request from pre-request script?
+How to trigger another request from pre-request script?
 ----------------------------------------------------------------
 
 **Option 1** You can trigger another request in the collection from the pre-request script using ``postman.setNextRequest``.

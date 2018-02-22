@@ -56,6 +56,66 @@ Assert that the property isAllowed is true for the COUNTRY filter. ::
     });
 
 
+How find nested object by object name?
+--------------------------------------
+
+Given the following response: ::
+
+    {
+        "id": "5a866bd667ff15546b84ab78",
+        "limits": {
+            "59974328d59230f9a3f946fe": {
+                "lists": {
+                    "openPerBoard": {
+                        "count": 13,
+                        "status": "ok", <-- CHECK ME
+                        "disableAt": 950,
+                        "warnAt": 900
+                    },
+                    "totalPerBoard": {
+                        "count": 20,
+                        "status": "ok",  <-- CHECK ME
+                        "disableAt": 950,
+                        "warnAt": 900
+                    }
+                }
+            }
+        }
+    }
+
+You want to check the value of the `status` in both objects (openPerBoard, totalPerBoard). The problem is that in order to each both objects you need first to reach the lists object, which itself is a property of a randomly named object (59974328d59230f9a3f946fe). 
+
+So we could write the whole path ``limits.59974328d59230f9a3f946fe.lists.openPerBoard.status`` but this will probably work only once.
+
+For that reason it is first needed to search inside the ``limits`` object for the ``lists`` object. In order to make the code more readable, we will create a function for that: ::
+
+    function findObjectContaininsLists(limits) {
+        // Iterate over the properties (keys) in the object
+        for (var key in limits) {
+            // console.log(key, limits[key]);
+            // If the property is lists, return the lists object
+            if (limits[key].hasOwnProperty('lists')) {
+                // console.log(limits[key].lists);
+                return limits[key].lists;
+            }
+        }
+    }
+
+The function will iterate over the limits array to see if any object contains a ``lists`` object.
+
+Next all we need to do is to call the function and the assertions will be trivial: ::
+
+    pm.test("Check status", function () {
+        // Parse JSON body
+        var jsonData = pm.response.json();
+        
+        // Retrieve the lists object
+        var lists = findObjectContaininsLists(jsonData.limits);
+        pm.expect(lists.openPerBoard.status).to.eql('ok');
+        pm.expect(lists.totalPerBoard.status).to.eql('ok');
+    });
+
+
 How to compare value of a response with an already defined variable?
 ---------------------------------------------------------------------
 
@@ -176,3 +236,34 @@ So you have multiple ways to deal with this:
     });
 
 Hope this helps and clarifies a bit the error.
+
+How to do a partial object match assertion?
+-------------------------------------------
+
+Given the reponse: ::
+
+    {
+        "uid": "12344",
+        "pid": "8896",
+        "firstName": "Jane",
+        "lastName": "Doe",
+        "companyName": "ACME"
+    }
+
+You want to assert that a part of the reponse has a specific value. For example you are not interested in the dynamic value of uid and pid but you want to assert firstName, lastName and companyName. 
+
+You can do a partial match of the response by using the ``to.include`` expression. Optionally you can check the existence of the additional properties without checking the value. ::
+
+    pm.test("Should include object", function () {
+        var jsonData = pm.response.json();
+        var expectedObject = {
+            "firstName": "Jane",
+            "lastName": "Doe",
+            "companyName": "ACME"
+        }
+        pm.expect(jsonData).to.include(expectedObject);
+
+        // Optional check if properties actually exist
+        pm.expect(jsonData).to.have.property('uid');
+        pm.expect(jsonData).to.have.property('pid');
+    });

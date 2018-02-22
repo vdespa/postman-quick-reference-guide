@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Request creation &mdash; Postman Quick Reference Guide Preview - February 2018 documentation</title>
+  <title>Request creation &mdash; Postman Quick Reference Guide Version 1.0.0 - February 2018 documentation</title>
   
 
   
@@ -35,7 +35,7 @@
         <link rel="index" title="Index"
               href="genindex.html"/>
         <link rel="search" title="Search" href="search.html"/>
-    <link rel="top" title="Postman Quick Reference Guide Preview - February 2018 documentation" href="index.html"/>
+    <link rel="top" title="Postman Quick Reference Guide Version 1.0.0 - February 2018 documentation" href="index.html"/>
         <link rel="next" title="Assertions" href="assertions.html"/>
         <link rel="prev" title="Postman Cheatsheet" href="cheatsheet.html"/> 
 
@@ -87,13 +87,15 @@
             
             
               <p class="caption"><span class="caption-text">Contents:</span></p>
-<ul class="current">
+<ul>
 <li class="toctree-l1"><a class="reference internal" href="cheatsheet.html">Postman Cheatsheet</a></li>
+</ul>
+<ul class="current">
 <li class="toctree-l1 current"><a class="current reference internal" href="#">Request creation</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="#i-have-an-environment-variable-as-url-can-i-use-it-inside-a-script-like-pm-sendrequest">I have an environment variable as {‌{url}}. Can I use it inside a script (like pm.sendRequest)?</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#how-to-use-pre-request-script-to-pass-dynamic-data-in-the-request-body">How to use pre-request script to pass dynamic data in the request body?</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#how-to-generate-random-data">How to generate random data?</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#how-to-trigger-another-another-request-from-pre-request-script">How to trigger another another request from pre-request script?</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#how-to-trigger-another-request-from-pre-request-script">How to trigger another request from pre-request script?</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#how-to-pass-arrays-and-objects-between-requests">How to pass arrays and objects between requests?</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#how-to-read-external-files">How to read external files?</a></li>
 </ul>
@@ -101,7 +103,10 @@
 <li class="toctree-l1"><a class="reference internal" href="assertions.html">Assertions</a></li>
 <li class="toctree-l1"><a class="reference internal" href="workflows.html">Workflows</a></li>
 <li class="toctree-l1"><a class="reference internal" href="newman.html">Newman</a></li>
-<li class="toctree-l1"><a class="reference internal" href="course.html">&gt;&gt; Postman online course</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Additional resourses:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="course.html">Postman online course</a></li>
 </ul>
 
             
@@ -239,10 +244,19 @@
 </div>
 <p>The disadvantage of this method is that you cannot use these special variables in a pre-request script or test. Additionally they will be only generated once per request, so using <code class="docutils literal notranslate"><span class="pre">{‌{$guid}}</span></code> more than once will generate the same data in a request.</p>
 <p><strong>Option 2</strong> Using existing JavaScript random generators</p>
-<p>TODO</p>
+<p>Below you will find an exemple function that you can use to generate integer number between a specific interval:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">function</span> <span class="n">getRandomNumber</span><span class="p">(</span><span class="n">minValue</span><span class="p">,</span> <span class="n">maxValue</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="n">Math</span><span class="o">.</span><span class="n">floor</span><span class="p">(</span><span class="n">Math</span><span class="o">.</span><span class="n">random</span><span class="p">()</span> <span class="o">*</span> <span class="p">(</span><span class="n">maxValue</span> <span class="o">-</span> <span class="n">minValue</span> <span class="o">+</span><span class="mi">1</span><span class="p">))</span> <span class="o">+</span> <span class="nb">min</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div>
 </div>
-<div class="section" id="how-to-trigger-another-another-request-from-pre-request-script">
-<h2>How to trigger another another request from pre-request script?<a class="headerlink" href="#how-to-trigger-another-another-request-from-pre-request-script" title="Permalink to this headline">¶</a></h2>
+<p>You can call the function like this:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">var</span> <span class="n">myRandomNumber</span> <span class="o">=</span> <span class="n">getRandomNumber</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">100</span><span class="p">);</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="how-to-trigger-another-request-from-pre-request-script">
+<h2>How to trigger another request from pre-request script?<a class="headerlink" href="#how-to-trigger-another-request-from-pre-request-script" title="Permalink to this headline">¶</a></h2>
 <p><strong>Option 1</strong> You can trigger another request in the collection from the pre-request script using <code class="docutils literal notranslate"><span class="pre">postman.setNextRequest</span></code>.</p>
 <p>That can be done with:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">postman</span><span class="o">.</span><span class="n">setNextRequest</span><span class="p">(</span><span class="s1">&#39;Your request name as saved in Postman&#39;</span><span class="p">);</span>
@@ -336,7 +350,7 @@
     <script type="text/javascript">
         var DOCUMENTATION_OPTIONS = {
             URL_ROOT:'./',
-            VERSION:'Preview - February 2018',
+            VERSION:'Version 1.0.0 - February 2018',
             COLLAPSE_INDEX:false,
             FILE_SUFFIX:'.html',
             HAS_SOURCE:  true,
