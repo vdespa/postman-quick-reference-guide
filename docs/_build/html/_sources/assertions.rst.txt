@@ -83,7 +83,7 @@ Given the following response: ::
         }
     }
 
-You want to check the value of the `status` in both objects (openPerBoard, totalPerBoard). The problem is that in order to each both objects you need first to reach the lists object, which itself is a property of a randomly named object (59974328d59230f9a3f946fe). 
+You want to check the value of the `status` in both objects (openPerBoard, totalPerBoard). The problem is that in order to reach both objects you need first to reach the lists object, which itself is a property of a randomly named object (59974328d59230f9a3f946fe). 
 
 So we could write the whole path ``limits.59974328d59230f9a3f946fe.lists.openPerBoard.status`` but this will probably work only once.
 

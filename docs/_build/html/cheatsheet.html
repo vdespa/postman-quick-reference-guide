@@ -353,11 +353,11 @@
 <p><strong>Any content type / HTML responses</strong></p>
 <p>Exact body match:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">pm</span><span class="o">.</span><span class="n">response</span><span class="o">.</span><span class="n">to</span><span class="o">.</span><span class="n">have</span><span class="o">.</span><span class="n">body</span><span class="p">(</span><span class="s2">&quot;OK&quot;</span><span class="p">);</span>
-<span class="n">pm</span><span class="o">.</span><span class="n">response</span><span class="o">.</span><span class="n">to</span><span class="o">.</span><span class="n">have</span><span class="o">.</span><span class="n">body</span><span class="p">(</span><span class="s1">&#39;{&quot;success&quot;=true});</span>
+<span class="n">pm</span><span class="o">.</span><span class="n">response</span><span class="o">.</span><span class="n">to</span><span class="o">.</span><span class="n">have</span><span class="o">.</span><span class="n">body</span><span class="p">(</span><span class="s1">&#39;{&quot;success&quot;=true}&#39;</span><span class="p">);</span>
 </pre></div>
 </div>
 <p>Partial body match / body contains:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">pm</span><span class="o">.</span><span class="n">expect</span><span class="p">(</span><span class="n">pm</span><span class="o">.</span><span class="n">response</span><span class="o">.</span><span class="n">text</span><span class="p">())</span><span class="o">.</span><span class="n">to</span><span class="o">.</span><span class="n">include</span><span class="p">(</span><span class="s1">&#39;Order placed.);</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">pm</span><span class="o">.</span><span class="n">expect</span><span class="p">(</span><span class="n">pm</span><span class="o">.</span><span class="n">response</span><span class="o">.</span><span class="n">text</span><span class="p">())</span><span class="o">.</span><span class="n">to</span><span class="o">.</span><span class="n">include</span><span class="p">(</span><span class="s1">&#39;Order placed.&#39;</span><span class="p">);</span>
 </pre></div>
 </div>
 <p><strong>JSON responses</strong></p>

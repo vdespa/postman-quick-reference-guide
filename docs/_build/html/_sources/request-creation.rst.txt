@@ -93,6 +93,25 @@ You can call the function like this: ::
 
     var myRandomNumber = getRandomNumber(0, 100);
 
+And the output will look similar to: ::
+
+    67
+
+
+Below you will find an exemple function that you can use to generate random strings: ::
+
+    function getRandomString() {
+        Math.random().toString(36).substring(2);
+    }
+
+You can call the function like this: ::
+
+    var myRandomNumber = getRandomString();
+
+And the output will look similar to: ::
+
+    5q04pes32yi
+
 
 How to trigger another request from pre-request script?
 ----------------------------------------------------------------

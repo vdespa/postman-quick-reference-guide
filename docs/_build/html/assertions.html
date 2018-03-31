@@ -251,7 +251,7 @@ You can read an extensive documentation on Chai by visiting <a class="reference 
 <span class="p">}</span>
 </pre></div>
 </div>
-<p>You want to check the value of the <cite>status</cite> in both objects (openPerBoard, totalPerBoard). The problem is that in order to each both objects you need first to reach the lists object, which itself is a property of a randomly named object (59974328d59230f9a3f946fe).</p>
+<p>You want to check the value of the <cite>status</cite> in both objects (openPerBoard, totalPerBoard). The problem is that in order to reach both objects you need first to reach the lists object, which itself is a property of a randomly named object (59974328d59230f9a3f946fe).</p>
 <p>So we could write the whole path <code class="docutils literal notranslate"><span class="pre">limits.59974328d59230f9a3f946fe.lists.openPerBoard.status</span></code> but this will probably work only once.</p>
 <p>For that reason it is first needed to search inside the <code class="docutils literal notranslate"><span class="pre">limits</span></code> object for the <code class="docutils literal notranslate"><span class="pre">lists</span></code> object. In order to make the code more readable, we will create a function for that:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">function</span> <span class="n">findObjectContaininsLists</span><span class="p">(</span><span class="n">limits</span><span class="p">)</span> <span class="p">{</span>

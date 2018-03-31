@@ -206,11 +206,11 @@ Body
 Exact body match: ::
 
     pm.response.to.have.body("OK");
-    pm.response.to.have.body('{"success"=true});
+    pm.response.to.have.body('{"success"=true}');
 
 Partial body match / body contains: ::
 
-    pm.expect(pm.response.text()).to.include('Order placed.);
+    pm.expect(pm.response.text()).to.include('Order placed.');
 
 **JSON responses**
 

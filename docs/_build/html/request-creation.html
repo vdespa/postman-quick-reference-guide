@@ -254,6 +254,24 @@
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">var</span> <span class="n">myRandomNumber</span> <span class="o">=</span> <span class="n">getRandomNumber</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">100</span><span class="p">);</span>
 </pre></div>
 </div>
+<p>And the output will look similar to:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="mi">67</span>
+</pre></div>
+</div>
+<p>Below you will find an exemple function that you can use to generate random strings:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">function</span> <span class="n">getRandomString</span><span class="p">()</span> <span class="p">{</span>
+    <span class="n">Math</span><span class="o">.</span><span class="n">random</span><span class="p">()</span><span class="o">.</span><span class="n">toString</span><span class="p">(</span><span class="mi">36</span><span class="p">)</span><span class="o">.</span><span class="n">substring</span><span class="p">(</span><span class="mi">2</span><span class="p">);</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>You can call the function like this:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">var</span> <span class="n">myRandomNumber</span> <span class="o">=</span> <span class="n">getRandomString</span><span class="p">();</span>
+</pre></div>
+</div>
+<p>And the output will look similar to:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="mi">5</span><span class="n">q04pes32yi</span>
+</pre></div>
+</div>
 </div>
 <div class="section" id="how-to-trigger-another-request-from-pre-request-script">
 <h2>How to trigger another request from pre-request script?<a class="headerlink" href="#how-to-trigger-another-request-from-pre-request-script" title="Permalink to this headline">¶</a></h2>
