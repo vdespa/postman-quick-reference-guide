@@ -194,7 +194,7 @@ To parse and retrive the value, we will use the cherrio JavaScript library: ::
     responseHTML = cheerio(pm.response.text());
     console.log(responseHTML.find('[name="_csrf"]').val());
 
-Cheerio is desinged for non-browser use and implements a subset of the jQuery functionality. Read more about it at https://github.com/cheeriojs/cheerio
+Cheerio is designed for non-browser use and implements a subset of the jQuery functionality. Read more about it at https://github.com/cheeriojs/cheerio
 
 
 How to fix the error "ReferenceError: jsonData is not defined"?
