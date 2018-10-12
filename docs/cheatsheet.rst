@@ -287,7 +287,9 @@ Helper API for testing requests. Read more at: https://docs.postman-echo.com.
 Workflows
 =========
 
-Only work with automated collection runs such as with the Collection Runner or Newman.
+Only work with automated collection runs such as with the Collection Runner or Newman. It will not have any effect when using inside the Postman App. 
+
+Additionaly it is important to note that this will only affect the next request being executed. Even if you put this inside the pre-request script, it will not skip the current request.
 
 **Set which will be the next request to be executed**
 
