@@ -6,4 +6,6 @@ sudo: false
 cache: pip
 
 install: "pip install sphinx~=1.5.3"
-script: sphinx-build -nWT -b dummy . _build/html
+script:
+  - cd docs
+  - sphinx-build -nWT -b dummy . _build/html
