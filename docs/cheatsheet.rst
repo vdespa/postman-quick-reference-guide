@@ -12,90 +12,109 @@ For a detailed documentation on each feature, check out https://www.getpostman.c
 Variables
 =========
 
-Code snippets for working with variables in scripts (pre-request, tests).
+All variables can be manually set using the Postman GUI and are scoped.
 
-Setting variables
------------------
+The code snippets can be used ofr working with variables in scripts (pre-request, tests).
 
-**Global variable**
+Getting variables in the Request Builder
+----------------------------------------
+
+Depending on the closest scope:
+
+Syntax: ``{{myVariable}}``
+
+**Examples**: 
+
+Request URL: ``http://{{domain}}/users/{{userId}}``
+
+Headers (key:value): ``X-{{myHeaderName}}:foo``
+
+Request body: ``{"id": "{{userId}}", "name": "John Doe"}``
+
+
+Global variables
+----------------
+
+General purpose variables, ideal for quick results and prototyping. 
+
+Please consider using one of the more specialized variables below. Delete variables once they are no longer needed.
+
+**When to use:**
+
+- passing data to other requests
+
+**Setting**
 
 .. code-block:: javascript
 
     pm.globals.set('myVariable', MY_VALUE);
 
-**Collection variable**
-    
-    Can only be set from Postman (at this moment).
-
-**Environment variable** ::
-
-    pm.environment.set('myVariable', MY_VALUE);
-
-**Data variable**
-    
-    Can only be set from a CSV or a JSON file.
-
-**Local variable** ::
-
-    var myVar = MY_VALUE;
-
-
-Examples: ::
-
-    pm.globals.set('name', 'John Doe');
-    pm.environment.set('age', 29);
-
-Getting variables
------------------
-
-**Request builder**
-
-Syntax: ``{{myVariable}}``
-
-Request URL: ``http://{{domain}}/users/{{userId}}``
-
-Headers (key:value): X-{{myHeaderName}}:foo
-
-Body: ``{"id": "{{userId}}", "name": "John Doe"}``
-
-**Depending on the matching scope** ::
-
-    pm.variables.get('myVariable');
-
-**Global variable** ::
+**Getting** ::
 
     pm.globals.get('myVariable');
 
-**Collection variable**
-    
-    Can only be used in the Request Builder (at this moment). Syntax: ``{{myVariable}}``
+Alternatively, depending on the scope: ::
 
-**Environment variable** ::
+    pm.variables.get('myVariable');
 
-    pm.environment.get('myVariable');
-
-**Data variable** ::
-
-    pm.iterationData.get('myVariable);
-
-**Local variable** ::
-
-    myVar
-
-Removing variables
-------------------
-
-**Global variable**
+**Removing**
 
 Remove one variable ::
 
     pm.globals.unset('myVariable');
 
-Remove ALL global variables ::
+Remove ALL global variables (rather unusual) ::
 
     pm.globals.clear();
 
-**Environment variable**
+Collection variables
+--------------------
+
+They can be mostly used for storing some constants that do not change during the execution of the collection. 
+
+**When to use:**
+
+- for constants that do not change during the execution
+- for URLs / authentication credentials if only one environment exists
+
+**Setting**
+
+Collection variables are tied to a specific collection and new variables can be defined or altered only by using the Postman GUI.
+
+**Getting**
+
+Depending on the closest scope: ::
+
+    pm.variables.get('myVariable');
+
+**Removing**
+
+Collection variables can only be removed from the Postman GUI.
+
+Environment variables
+---------------------
+
+Environment variables are tied to the selected environment. Good alternative to global variables as they have a narrower scope.
+
+**When to use:**
+
+- storing environment specific information
+- URLs, authentication credentials
+- passing data to other requests
+
+**Setting** ::
+
+    pm.environment.set('myVariable', MY_VALUE);
+
+**Getting** ::
+
+    pm.environment.get('myVariable');
+
+Depending on the closest scope: ::
+
+    pm.variables.get('myVariable');
+
+**Removing**
 
 Remove one variable ::
     
@@ -105,11 +124,63 @@ Remove ALL environment variables ::
 
     pm.environment.clear();
 
+**Examples**: ::
 
-DYNAMIC VARIABLES
+    pm.environment.set('name', 'John Doe');
+    console.log(pm.environment.get('name'));
+    console.log(pm.variables.get('name'));
+
+
+Data variables
+--------------
+
+Exist only during the execution of an iteration (created by the Collection Runner or Newman).
+
+**When to use:**
+
+- when multiple data-sets are needed
+
+**Setting**
+
+Can only be set from a CSV or a JSON file.
+
+**Getting** ::
+
+    pm.iterationData.get('myVariable);
+
+Depending on the closest scope: ::
+
+    pm.variables.get('myVariable');
+
+**Removing**
+
+Can only be removed from within the CSV or JSON file.
+
+Local variables
+---------------
+
+Local variables are only available withing the request that has set them.
+
+**When to use:**
+
+- passing data from the pre-request script to the request or tests
+
+**Setting** ::
+
+    pm.variables.set('myVariable', MY_VALUE);
+
+**Getting** ::
+
+    pm.variables.get('myVariable', MY_VALUE);
+
+**Removing**
+
+Local variables are automatically removed once the tests have been executed. They have no effects on other requests.
+
+Dynamic variables
 -----------------
 
-**Experimental feature**. Can only be used in request builder. Only one value is generated per request.
+**Experimental feature**. Can only be used in request builder. Only ONE value is generated per request.
 
 All dynamic variables can be combined with strings, in order to generate dynamic / unique data. 
 
@@ -133,7 +204,7 @@ Example output: `1507370977``
 Example output: ``567``
 
 
-LOGGING / DEBUGGING VARIABLES
+Logging / Debugging variables
 -----------------------------
 
 Open Postman Console and use `console.log` in your test or pre-request script. 
@@ -216,22 +287,22 @@ Partial body match / body contains: ::
 
 Parse body (need for all assertions): ::
 
-    var jsonData = pm.response.json();
+    const response = pm.response.json();
 
 Simple value check: ::
 
-    pm.expect(jsonData.age).to.eql(30);
-    pm.expect(jsonData.name).to.eql('John);
+    pm.expect(response.age).to.eql(30);
+    pm.expect(response.name).to.eql('John);
 
 Nested value check: ::
 
-    pm.expect(jsonData.products.0.category).to.eql('Detergent');
+    pm.expect(response.products.0.category).to.eql('Detergent');
 
 **XML responses**
 
 Convert XML body to JSON: ::
 
-    var jsonData = xml2Json(responseBody);
+    const response = xml2Json(responseBody);
 
 Note: see assertions for JSON responses.
 
@@ -287,9 +358,9 @@ Helper API for testing requests. Read more at: https://docs.postman-echo.com.
 Workflows
 =========
 
-Only work with automated collection runs such as with the Collection Runner or Newman. It will not have any effect when using inside the Postman App. 
+Only work with automated collection runs such as with the Collection Runner or Newman. It will NOT have any effect when using inside the Postman App. 
 
-Additionaly it is important to note that this will only affect the next request being executed. Even if you put this inside the pre-request script, it will not skip the current request.
+Additionaly it is important to note that this will only affect the next request being executed. Even if you put this inside the pre-request script, it will NOT skip the current request.
 
 **Set which will be the next request to be executed**
 

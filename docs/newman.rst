@@ -12,6 +12,18 @@ In order to do that you can use the ``--delay`` parameter and specifiy a delay i
     newman run collection.json --delay 10000
 
 
+Jenkins is showing wierd characters in the console. What to do?
+---------------------------------------------------------------
+
+.. image:: _static/jenkins-unicode.png
+    :scale: 50 %
+
+If the Newman output in your CI server is not properly displayed, try adding following flags: ``--disable-unicode`` or / and ``--color off``
+
+Example: ::
+
+    newman run collection.json --disable-unicode
+
 
 How to pass machine name and port number dynamically when running the tests?
 ----------------------------------------------------------------------------

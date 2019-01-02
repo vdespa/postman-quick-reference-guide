@@ -20,13 +20,13 @@
 # -- Project information -----------------------------------------------------
 
 project = u'Postman Quick Reference Guide'
-copyright = u'2018, Valentin Despa'
+copyright = u'2018-2019, Valentin Despa'
 author = u'Valentin Despa'
 
 # The short X.Y version
 version = u''
 # The full version, including alpha/beta/rc tags
-release = u'Version 1.0.2 - October 2018'
+release = u'Version 1.1.0 - January 2019'
 
 
 # -- General configuration ---------------------------------------------------

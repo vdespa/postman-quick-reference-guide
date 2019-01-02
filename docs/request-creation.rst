@@ -154,7 +154,7 @@ After this you can set the whole response (or just a subset like this): ::
 
     pm.environment.set('myData', JSON.stringify(jsonData)); 
 
-You need to use JSON.stringify() before saving objects / arrays to a Postman variable. Otherwise it will not work.
+You need to use JSON.stringify() before saving objects / arrays to a Postman variable. Otherwise it may not work (depending on your Postman or Newman version).
 
 In the next request where you want to retrieve the data, just use:
 
@@ -173,4 +173,7 @@ If you have some information saved on a file locally on your computer, you might
 
 Unfortunately this is not really possible. There is a way to read a data file in JSON or CSV format, which allows you to make some variables dynamic. These variables are called data variables and are mostly used for testing different iterations on a specific request or collection.
 
-The alternative would be to start a local server to serve that file and to get it in Postman with a GET request. 
+Possible options:
+
+- start a local server to serve that file and to get it in Postman with a GET request. 
+- use Newman as a custom Node.js script and read the file using the filesystem.
