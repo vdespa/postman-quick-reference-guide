@@ -22,14 +22,11 @@ Before Postman 7.2, only the following dynamic variables were available:
 Starting with version 7.2, Postman is using the faker.js library and added more variables. If used multiple times, they can return different values per request.
 Note: the autocomplete support in the Request Builder might be missing.
 
-June 2019
+June 2019x
 
 .. raw:: latex
 
     \begin{landscape}
-
-.. table:: This is my table
-    :widths: 20 20 30 30
 
 +--------------------------+--------------------------------+-------------------------------------------------------+--------------------------------------------------------------------------------------------------------------------------------+
 | Variable name            | Description                    | Examples                                              | Comment                                                                                                                        |
