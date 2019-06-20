@@ -15,6 +15,14 @@ Cheatsheet
 
    cheatsheet
 
+Dynamic variables
+-----------------------------------
+
+.. toctree::
+   :maxdepth: 2
+
+   dynamic-variables.rst
+
 Simple solutions to common problems 
 -----------------------------------
 

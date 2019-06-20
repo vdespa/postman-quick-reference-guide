@@ -197,7 +197,7 @@ Example output: ``d96d398a-b655-4638-a6e5-40c0dc282fb7``
 
 ``{{$timestamp}}`` - current timestamp. 
 
-Example output: `1507370977``
+Example output: `1507370977`
 
 ``{{$randomInt}}`` - random integer between 0 and 1000. 
 
