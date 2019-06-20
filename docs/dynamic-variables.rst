@@ -5,7 +5,7 @@ Dynamic variables
 Dynamic variables can only be used in the request builder. They do not work in scripts (pre-request/tests)!
 
 .. image:: _static/dynamic-variables.png
-    :scale: 100 %
+    :scale: 50 %
 
 Before Postman 7.2, only the following dynamic variables were available:
 
@@ -21,6 +21,10 @@ Before Postman 7.2, only the following dynamic variables were available:
 
 Starting with version 7.2, Postman is using the faker.js library and added more variables. If used multiple times, they can return different values per request.
 Note: the autocomplete support in the Request Builder might be missing.
+
+.. raw:: latex
+
+    \begin{landscape}
 
 .. table:: This is my table
     :widths: 20 20 30 30
@@ -98,3 +102,7 @@ Note: the autocomplete support in the Request Builder might be missing.
 +--------------------------+--------------------------------+-------------------------------------------------------+--------------------------------------------------------------------------------------------------------------------------------+
 |                          |                                |                                                       |                                                                                                                                |
 +--------------------------+--------------------------------+-------------------------------------------------------+--------------------------------------------------------------------------------------------------------------------------------+
+
+.. raw:: latex
+
+    \end{landscape}
