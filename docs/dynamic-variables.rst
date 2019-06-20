@@ -23,8 +23,7 @@ Starting with version 7.2, Postman is using the faker.js library and added more 
 Note: the autocomplete support in the Request Builder might be missing.
 
 .. raw:: latex
-
-    \begin{landscape}
+\begin{landscape}
 
 .. table:: This is my table
     :widths: 20 20 30 30
@@ -104,5 +103,4 @@ Note: the autocomplete support in the Request Builder might be missing.
 +--------------------------+--------------------------------+-------------------------------------------------------+--------------------------------------------------------------------------------------------------------------------------------+
 
 .. raw:: latex
-
-    \end{landscape}
+\end{landscape}
