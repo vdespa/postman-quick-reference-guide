@@ -292,6 +292,12 @@ Note: the autocomplete support in the Request Builder might be missing.
 | $randomSemver                 | Version (using semantic version)           | 6.3.4, 2.8.0, 1.7.6                                                                |         |
 +-------------------------------+--------------------------------------------+------------------------------------------------------------------------------------+---------+
 
+.. raw:: latex
+
+    \end{landscape}
+
+Comments
+
 .. [1] Not really useful as you cannot specify a country. 
 .. [2] Limited usability as you cannot specify a country.
 .. [3] Warning: it may generate invalid data, with street numbers starting with 0. Limited usability as you cannot specify a country. 
@@ -318,6 +324,3 @@ Note: the autocomplete support in the Request Builder might be missing.
 .. [24] Seems broken.
 .. [25] Seems broken.
 
-.. raw:: latex
-
-    \end{landscape}
