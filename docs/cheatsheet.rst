@@ -16,6 +16,8 @@ All variables can be manually set using the Postman GUI and are scoped.
 
 The code snippets can be used ofr working with variables in scripts (pre-request, tests).
 
+Learn more about the different variables scopes in this `tutorial <https://medium.com/@vdespa/demystifying-postman-variables-how-and-when-to-use-different-variable-scopes-66ad8dc11200>`_.
+
 Getting variables in the Request Builder
 ----------------------------------------
 
@@ -159,11 +161,11 @@ Can only be removed from within the CSV or JSON file.
 Local variables
 ---------------
 
-Local variables are only available withing the request that has set them.
+Local variables are only available withing the request that has set them or when using Newman / Collection runner during the entire exection.
 
 **When to use:**
 
-- passing data from the pre-request script to the request or tests
+- whenever you would like to override all other variable scopes — for whatever reason. Not sure though then this is needed.
 
 **Setting** ::
 
@@ -175,7 +177,7 @@ Local variables are only available withing the request that has set them.
 
 **Removing**
 
-Local variables are automatically removed once the tests have been executed. They have no effects on other requests.
+Local variables are automatically removed once the tests have been executed. 
 
 Dynamic variables
 -----------------
@@ -191,17 +193,7 @@ Example JSON body:
     {"name": "John Doe", "email": "john.doe.{{$timestamp}}@example.com"}
 
 
-``{{$guid}}`` - global unique identifier. 
-
-Example output: ``d96d398a-b655-4638-a6e5-40c0dc282fb7``
-
-``{{$timestamp}}`` - current timestamp. 
-
-Example output: `1507370977`
-
-``{{$randomInt}}`` - random integer between 0 and 1000. 
-
-Example output: ``567``
+Please see the section dedicated to `Dynamic variables`_.
 
 
 Logging / Debugging variables
