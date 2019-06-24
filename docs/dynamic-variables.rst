@@ -288,4 +288,8 @@ Note: the autocomplete support in the Request Builder might be missing.
 | $randomSemver                 | Version (using semantic version)           | 6.3.4, 2.8.0, 1.7.6                                                                |                                                                                                                                   |
 +-------------------------------+--------------------------------------------+------------------------------------------------------------------------------------+-----------------------------------------------------------------------------------------------------------------------------------+
 
-Text after the table .. [1] Body elements go here.
+[#]_ is a reference to footnote 1, and [#]_ is a reference to
+footnote 2.
+
+.. [#] This is footnote 1.
+.. [#] This is footnote 2.
