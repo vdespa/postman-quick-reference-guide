@@ -1,4 +1,3 @@
-.. _dynamic-variables:
 *****************
 Dynamic variables
 *****************
@@ -297,7 +296,6 @@ Note: the autocomplete support in the Request Builder might be missing.
 
     \end{landscape}
 
-Comments
 
 .. [1] Not really useful as you cannot specify a country. 
 .. [2] Limited usability as you cannot specify a country.

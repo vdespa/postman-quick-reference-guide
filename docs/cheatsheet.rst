@@ -193,8 +193,7 @@ Example JSON body:
     {"name": "John Doe", "email": "john.doe.{{$timestamp}}@example.com"}
 
 
-Please see the section dedicated to :ref:`dynamic-variables`.
-
+Please see the section dedicated to :doc:`Dynamic variables </dynamic-variables>`
 
 Logging / Debugging variables
 -----------------------------
