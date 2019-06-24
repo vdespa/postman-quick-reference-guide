@@ -182,7 +182,7 @@ Local variables are automatically removed once the tests have been executed.
 Dynamic variables
 -----------------
 
-**Experimental feature**. Can only be used in request builder. Only ONE value is generated per request.
+Can only be used in request builder. Only ONE value is generated per request.
 
 All dynamic variables can be combined with strings, in order to generate dynamic / unique data. 
 
@@ -193,7 +193,7 @@ Example JSON body:
     {"name": "John Doe", "email": "john.doe.{{$timestamp}}@example.com"}
 
 
-Please see the section dedicated to `Dynamic variables`_.
+Please see the section dedicated to :ref:`dynamic-variables`.
 
 
 Logging / Debugging variables

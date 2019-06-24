@@ -1,3 +1,4 @@
+.. _dynamic-variables:
 *****************
 Dynamic variables
 *****************
