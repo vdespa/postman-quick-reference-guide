@@ -311,9 +311,9 @@ Note: the autocomplete support in the Request Builder might be missing.
 .. [12] May not be a valid IBAN.
 .. [13] May not be a valid BIC.
 .. [14] Better use example emails.
-.. [15] Includes \n \r characters (CR + LF).
-.. [16] Length is unpredictable. May include \n \r characters (CR + LF).
-.. [17] Length is unpredictable. May include \n  characters (LF).
+.. [15] Includes \\n \\r characters (CR + LF).
+.. [16] Length is unpredictable. May include \\n \\r characters (CR + LF).
+.. [17] Length is unpredictable. May include \\n  characters (LF).
 .. [18] Seems to overlap with $$randomJobTitle.
 .. [19] Random format. Cannot specify a format / country.
 .. [20] Fixed format. Cannot specify another format / country
