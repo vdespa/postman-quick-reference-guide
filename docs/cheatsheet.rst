@@ -14,7 +14,7 @@ Variables
 
 All variables can be manually set using the Postman GUI and are scoped.
 
-The code snippets can be used ofr working with variables in scripts (pre-request, tests).
+The code snippets can be used for working with variables in scripts (pre-request, tests).
 
 Learn more about the different variables scopes in this `tutorial <https://medium.com/@vdespa/demystifying-postman-variables-how-and-when-to-use-different-variable-scopes-66ad8dc11200>`_.
 
