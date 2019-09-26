@@ -182,8 +182,6 @@ Local variables are automatically removed once the tests have been executed.
 Dynamic variables
 -----------------
 
-Can only be used in request builder. Only ONE value is generated per request.
-
 All dynamic variables can be combined with strings, in order to generate dynamic / unique data. 
 
 Example JSON body:
@@ -192,8 +190,11 @@ Example JSON body:
 
     {"name": "John Doe", "email": "john.doe.{{$timestamp}}@example.com"}
 
+If you want to use dynamic variables in scripts, you can use the `replaceIn` starting with Postman v7.6.0. ::
 
-Please see the section dedicated to :doc:`Dynamic variables </dynamic-variables>`
+    pm.variables.replaceIn('{{$randomFirstName}}'); // returns a String
+
+For more details please see the section dedicated to :doc:`Dynamic variables </dynamic-variables>`
 
 Logging / Debugging variables
 -----------------------------
@@ -296,6 +297,32 @@ Convert XML body to JSON: ::
     const response = xml2Json(responseBody);
 
 Note: see assertions for JSON responses.
+
+Skipping tests
+--------------
+
+You can use `pm.test.skip` to skip a test. Skipped tests will be displayed in reports.
+
+**Simple example** ::
+
+    pm.test.skip("Status code is 200", () => {
+        pm.response.to.have.status(200);
+    });
+
+**Conditional skip** ::
+
+    const shouldBeSkipped = true; // some condition
+
+    (shouldBeSkipped ? pm.test.skip : pm.test)("Status code is 200", () => {
+        pm.response.to.have.status(200);
+    });
+
+Failing tests
+-------------
+
+You can fail a test from the scripts without writing an assertion: ::
+
+    pm.expect.fail('This failed because ...');
 
 Postman Sandbox
 ===============

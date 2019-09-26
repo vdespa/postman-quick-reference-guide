@@ -2,10 +2,18 @@
 Dynamic variables
 *****************
 
-Dynamic variables can only be used in the request builder. They do not work in scripts (pre-request/tests)!
+Dynamic variables can be used in the request builder like this:
 
 .. image:: _static/dynamic-variables.png
     :scale: 50 %
+
+If you want to use dynamic variables in scripts, you can use the `replaceIn` starting with Postman v7.6.0. ::
+
+    pm.variables.replaceIn('{{$randomFirstName}}');
+
+    pm.variables.replaceIn('{{$randomFirstName}} {{$randomLastName}}');
+
+The `replaceIn` method will return a String with the resolved variables.
 
 Before Postman 7.2, only the following dynamic variables were available:
 

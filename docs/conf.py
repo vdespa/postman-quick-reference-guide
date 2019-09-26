@@ -26,7 +26,7 @@ author = u'Valentin Despa'
 # The short X.Y version
 version = u''
 # The full version, including alpha/beta/rc tags
-release = u'Version 1.2.0 - June 2019'
+release = u'Version 1.3.0 - September 2019'
 
 
 # -- General configuration ---------------------------------------------------

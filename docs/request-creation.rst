@@ -177,3 +177,12 @@ Possible options:
 
 - start a local server to serve that file and to get it in Postman with a GET request. 
 - use Newman as a custom Node.js script and read the file using the filesystem.
+
+How to add a delay between Postman requests?
+--------------------------------------------
+
+To add a delay after a request, add the following in your Tests: ::
+
+    setTimeout(() => {}, 10000);
+
+The example above will add a delay of 10000 milliseconds or 10 seconds.
