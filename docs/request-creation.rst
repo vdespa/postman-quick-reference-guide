@@ -57,6 +57,33 @@ In the request body you can simply use ``{{user}}``. This also works just as wel
         }
     }
 
+How can I modify the request headers?
+-------------------------------------
+
+You can modify the request headers from the Pre-request script as follows.
+
+**Add header** ::
+
+    pm.request.headers.add({
+        key: 'X-Foo',
+        value: 'Postman'
+    });
+
+**Remove header** ::
+
+    pm.request.headers.remove('User-Agent'); // may not always work
+
+
+**Update header** ::
+
+    pm.request.headers.upsert(
+        { 
+            key: "User-Agent", 
+            value: "Not Postman"
+            
+        }
+    );
+
 
 How to generate random data?
 ----------------------------
