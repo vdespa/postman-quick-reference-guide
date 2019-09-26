@@ -89,4 +89,4 @@ Example loading a library using unpkg as a CDN: ::
         console.log(data);
     });
 
-Notice: in order to load a library and use it in Postman, the JavaScript code needs to be "compiled" and ready for distribution. Usually the code will be available as a *.min.js file or within the dist or umd folder.
+Notice: in order to load a library and use it in Postman, the JavaScript code needs to be "compiled" and ready for distribution. Usually the code will be available as a \*.min.js file or within the dist or umd folder.
