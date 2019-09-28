@@ -169,6 +169,39 @@ Below I am fetching a name from a remote API and setting it as a variable for us
 
 You can import this example in Postman by using this link: https://www.getpostman.com/collections/5a61c265d4a7bbd8b303
 
+How to send request with XML body from a script?
+------------------------------------------------
+
+You can use the following template to send a XML request from a script. Notice that `price` is a Postman variable that will be replaced. ::
+
+    const xmlBody = `<?xml version="1.0"?>
+    <catalog>
+    <book id="bk101">
+        <author>Gambardella, Matthew</author>
+        <title>XML Developer's Guide</title>
+        <genre>Computer</genre>
+        <price>{{price}}</price>
+        <publish_date>2000-10-01</publish_date>
+        <description>An in-depth look at creating applications 
+        with XML.</description>
+    </book>
+    </catalog>`;
+
+    const options = {
+        'method': 'POST',
+        'url': 'httpbin.org/post',
+        'header': {
+            'Content-Type': 'application/xml'
+        },
+        body: pm.variables.replaceIn(xmlBody) // replace any Postman variables
+    }
+
+
+    pm.sendRequest(options, function (error, response) { 
+        if (error) throw new Error(error);
+        console.log(response.body);
+    });
+
 
 How to pass arrays and objects between requests?
 ------------------------------------------------
