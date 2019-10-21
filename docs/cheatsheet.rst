@@ -72,26 +72,23 @@ Remove ALL global variables (rather unusual) ::
 Collection variables
 --------------------
 
-They can be mostly used for storing some constants that do not change during the execution of the collection. 
-
 **When to use:**
 
-- for constants that do not change during the execution
+- good alternative to global variables or environment variables
 - for URLs / authentication credentials if only one environment exists
 
-**Setting**
+**Setting** ::
 
-Collection variables are tied to a specific collection and new variables can be defined or altered only by using the Postman GUI.
+    pm.collectionVariables.set('myVariable', MY_VALUE);
 
-**Getting**
+**Getting** ::
 
-Depending on the closest scope: ::
+    pm.collectionVariables.get('myVariable');
 
-    pm.variables.get('myVariable');
+**Removing** ::
 
-**Removing**
+    pm.collectionVariables.unset('myVariable');
 
-Collection variables can only be removed from the Postman GUI.
 
 Environment variables
 ---------------------
