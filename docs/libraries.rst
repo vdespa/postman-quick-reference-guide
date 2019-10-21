@@ -14,6 +14,11 @@ Simple library for working with the DOM model. Useful if you are getting back HT
     responseHTML = cheerio(pm.response.text());
     console.log(responseHTML.find('[name="firstName"]').val());
 
+Example fetching a CSRF code form the meta tag: ::
+
+    const $ = cheerio.load('<meta name="csrf" Content="the code">');
+    console.log($("meta[name='csrf']").attr("content"));
+
 Read more: https://github.com/cheeriojs/cheerio
 
 **crypto-js**
