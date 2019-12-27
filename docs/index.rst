@@ -31,6 +31,7 @@ Simple solutions to common problems
 
    request-creation
    assertions
+   schema-validation
    libraries
    workflows
    newman
