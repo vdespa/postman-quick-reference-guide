@@ -53,13 +53,13 @@ Possible types are:
 Object has required property
 ----------------------------
 
-This is the JSON response: ::
+Given this JSON response: ::
 
     {
         "code": "FX002"
     }
 
-This is the JSON schema with a property named code of type String that is mandatory: ::
+This is the JSON schema with a property named "code" of type String that is mandatory: ::
 
     const schema = {
         "type": "object",
@@ -67,4 +67,33 @@ This is the JSON schema with a property named code of type String that is mandat
             "code": { "type": "string" }
         },
         "required": ["code"]
+    };
+
+Nested objects
+--------------
+
+Given this JSON response: ::
+
+    {
+        "code": "2",
+        "error": {
+            "message": "Not permitted."
+        }
+    }
+
+This is the JSON schema with the an nested object named "error" that has a property named "message" that is a string. ::
+
+    const schema = {
+        "type": "object",
+        "properties": {
+            "code": { "type": "string" },
+            "error": { 
+                "type": "object",
+                "properties": {
+                    "message": { type: "string" }
+                },
+                "required": ["message"]
+            }
+        },
+        "required": ["code", "error"]
     };
