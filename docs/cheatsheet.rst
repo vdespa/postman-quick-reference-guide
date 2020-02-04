@@ -332,25 +332,53 @@ this is the object containing the script that is running, can access variables a
 pm.sendRequest
 --------------
 
-Allows to send simple HTTP(S) GET requests from tests and pre-request scripts. Example: ::
+Allows to send **simple HTTP(S) GET requests** from tests and pre-request scripts. Example: ::
 
-    pm.sendRequest('http://example.com', function (err, res) {
-        console.log(err ? err : res.json()); 
+    pm.sendRequest('https://httpbin.org/get', (error, response) => {
+        if (error) throw new Error(error);
+        console.log(response.json());        
     });
 
-Full-option HTTP(S) request: ::
 
-    const postRequest = {
-        url: 'http://example.com', method: 'POST',
+Full-option **HTTP POST request with JSON body**: ::
+
+    const payload = { name: 'John', age: 29};
+    
+    const options = {
+        method: 'POST',
+        url: 'https://httpbin.org/post', 
         header: 'X-Foo:foo',
         body: {
             mode: 'raw',
-            raw: JSON.stringify({ name: 'John' })
+            raw: JSON.stringify(payload)
         } 
     };
-    pm.sendRequest(postRequest, function (err, res) {
-        console.log(err ? err : res.json()); 
+    pm.sendRequest(options, (error, response) => { 
+        if (error) throw new Error(error);
+        console.log(response.json());
     });
+
+**Form-data POST request** (Postman will add the multipart/form-data header): ::
+
+    const options = {
+        'method': 'POST',
+        'url': 'https://httpbin.org/post',
+        'body': {
+                'mode': 'formdata',
+                'formdata': [
+                    {'key':'foo', 'value':'bar'},
+                    {'key':'bar', 'value':'foo'}
+                ]
+        }
+    };
+    pm.sendRequest(options, (error, response) => { 
+        if (error) throw new Error(error);
+        console.log(response.json());
+    });
+
+**Sending a file with form-data POST request**
+
+Due to security precautions, it is not possible to upload a file from a script using pm.sendRequest. You cannot read or write files from scripts.
 
 
 Postman Echo
