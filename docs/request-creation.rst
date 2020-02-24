@@ -113,7 +113,7 @@ The disadvantage of this method is that you cannot use these special variables i
 Below you will find an exemple function that you can use to generate integer number between a specific interval: ::
 
     function getRandomNumber(minValue, maxValue) {
-        return Math.floor(Math.random() * (maxValue - minValue +1)) + min;
+        return Math.floor(Math.random() * (maxValue - minValue +1)) + minValue;
     }
 
 You can call the function like this: ::
@@ -128,7 +128,7 @@ And the output will look similar to: ::
 Below you will find an exemple function that you can use to generate random strings: ::
 
     function getRandomString() {
-        Math.random().toString(36).substring(2);
+        return Math.random().toString(36).substring(2);
     }
 
 You can call the function like this: ::
