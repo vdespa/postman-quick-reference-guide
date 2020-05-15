@@ -129,6 +129,13 @@ Remove ALL environment variables ::
     console.log(pm.environment.get('name'));
     console.log(pm.variables.get('name'));
 
+** Detecting the environment name **
+
+If you need to know inside scripts which environment is currently active (locahost, production, ...) you can use the name property: ::
+
+    pm.environment.name
+
+
 
 Data variables
 --------------
