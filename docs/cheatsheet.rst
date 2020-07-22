@@ -25,7 +25,7 @@ Depending on the closest scope:
 
 Syntax: ``{{myVariable}}``
 
-**Examples**: 
+**Examples**:
 
 Request URL: ``http://{{domain}}/users/{{userId}}``
 
@@ -37,7 +37,7 @@ Request body: ``{"id": "{{userId}}", "name": "John Doe"}``
 Global variables
 ----------------
 
-General purpose variables, ideal for quick results and prototyping. 
+General purpose variables, ideal for quick results and prototyping.
 
 Please consider using one of the more specialized variables below. Delete variables once they are no longer needed.
 
@@ -116,7 +116,7 @@ Depending on the closest scope: ::
 **Removing**
 
 Remove one variable ::
-    
+
     pm.environment.unset("myVariable");
 
 Remove ALL environment variables ::
@@ -165,7 +165,7 @@ Can only be removed from within the CSV or JSON file.
 Local variables
 ---------------
 
-Local variables are only available withing the request that has set them or when using Newman / Collection runner during the entire exection.
+Local variables are only available withing the request that has set them or when using Newman / Collection runner during the entire execution.
 
 **When to use:**
 
@@ -181,12 +181,12 @@ Local variables are only available withing the request that has set them or when
 
 **Removing**
 
-Local variables are automatically removed once the tests have been executed. 
+Local variables are automatically removed once the tests have been executed.
 
 Dynamic variables
 -----------------
 
-All dynamic variables can be combined with strings, in order to generate dynamic / unique data. 
+All dynamic variables can be combined with strings, in order to generate dynamic / unique data.
 
 Example JSON body:
 
@@ -203,7 +203,7 @@ For more details please see the section dedicated to :doc:`Dynamic variables </d
 Logging / Debugging variables
 -----------------------------
 
-Open Postman Console and use `console.log` in your test or pre-request script. 
+Open Postman Console and use `console.log` in your test or pre-request script.
 
 Example: ::
 
@@ -213,7 +213,7 @@ Example: ::
 Assertions
 ==========
 
-Note: You need to add any of the assertions inside a ``pm.test`` callback. 
+Note: You need to add any of the assertions inside a ``pm.test`` callback.
 
 Example: ::
 
@@ -343,24 +343,24 @@ Allows to send **simple HTTP(S) GET requests** from tests and pre-request script
 
     pm.sendRequest('https://httpbin.org/get', (error, response) => {
         if (error) throw new Error(error);
-        console.log(response.json());        
+        console.log(response.json());
     });
 
 
 Full-option **HTTP POST request with JSON body**: ::
 
     const payload = { name: 'John', age: 29};
-    
+
     const options = {
         method: 'POST',
-        url: 'https://httpbin.org/post', 
+        url: 'https://httpbin.org/post',
         header: 'X-Foo:foo',
         body: {
             mode: 'raw',
             raw: JSON.stringify(payload)
-        } 
+        }
     };
-    pm.sendRequest(options, (error, response) => { 
+    pm.sendRequest(options, (error, response) => {
         if (error) throw new Error(error);
         console.log(response.json());
     });
@@ -378,7 +378,7 @@ Full-option **HTTP POST request with JSON body**: ::
                 ]
         }
     };
-    pm.sendRequest(options, (error, response) => { 
+    pm.sendRequest(options, (error, response) => {
         if (error) throw new Error(error);
         console.log(response.json());
     });
@@ -396,19 +396,19 @@ Helper API for testing requests. Read more at: https://docs.postman-echo.com.
 **Get Current UTC time in pre-request script** ::
 
     pm.sendRequest('https://postman-echo.com/time/now', function (err, res) {
-        if (err) { console.log(err); } 
+        if (err) { console.log(err); }
         else {
             var currentTime = res.stream.toString();
             console.log(currentTime);
             pm.environment.set("currentTime", currentTime);
         }
-    }); 
+    });
 
 
 Workflows
 =========
 
-Only work with automated collection runs such as with the Collection Runner or Newman. It will NOT have any effect when using inside the Postman App. 
+Only work with automated collection runs such as with the Collection Runner or Newman. It will NOT have any effect when using inside the Postman App.
 
 Additionaly it is important to note that this will only affect the next request being executed. Even if you put this inside the pre-request script, it will NOT skip the current request.
 
