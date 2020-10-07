@@ -262,7 +262,7 @@ Cookie exists: ::
 
 Cookie has value: ::
 
-    pm.expect(pm.cookies.get('sessionId')).to.eql(’ad3se3ss8sg7sg3');
+    pm.expect(pm.cookies.get('sessionId')).to.eql('ad3se3ss8sg7sg3');
 
 
 Body
