@@ -14,7 +14,7 @@ This is the JSON response: ::
 This is the JSON schema: ::
 
     const schema = {
-        "type": "object",
+        "type": "object"
     };
 
 And here is the test: ::
