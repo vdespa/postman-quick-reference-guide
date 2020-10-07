@@ -247,7 +247,7 @@ Headers
 
 Header exists: ::
 
-    pm.response.to.have.header(X-Cache');
+    pm.response.to.have.header('X-Cache');
 
 Header has value: ::
 
@@ -288,7 +288,7 @@ Parse body (need for all assertions): ::
 Simple value check: ::
 
     pm.expect(response.age).to.eql(30);
-    pm.expect(response.name).to.eql('John);
+    pm.expect(response.name).to.eql('John');
 
 Nested value check: ::
 
