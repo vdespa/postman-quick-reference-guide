@@ -39,9 +39,9 @@ Note: the autocomplete support in the Request Builder might be missing.
 +===============================+============================================+====================================================================================+=========+
 | $randomCity                   | City                                       | East Ryanfurt, Jenkinsview                                                         |         |
 +-------------------------------+--------------------------------------------+------------------------------------------------------------------------------------+---------+
-| $randomStreetName             | Street name                                | Mckenna Pines, Schiller Highway, Vandervort Pike                                   | [2]_    |
+| $randomStreetName             | Street name                                | Mckenna Pines, Schiller Highway, Vandervort Pike                                   | [1]_    |
 +-------------------------------+--------------------------------------------+------------------------------------------------------------------------------------+---------+
-| $randomStreetAddress          | Street with number                         | 98165 Tanya Passage, 0695 Monahan Squares                                          | [3]_    |
+| $randomStreetAddress          | Street with number                         | 98165 Tanya Passage, 0695 Monahan Squares                                          | [2]_    |
 +-------------------------------+--------------------------------------------+------------------------------------------------------------------------------------+---------+
 | $randomCountry                | Country                                    | Belgium, Antarctica (the territory South of 60 deg S)                              |         |
 +-------------------------------+--------------------------------------------+------------------------------------------------------------------------------------+---------+
@@ -57,7 +57,7 @@ Note: the autocomplete support in the Request Builder might be missing.
 +-------------------------------+--------------------------------------------+------------------------------------------------------------------------------------+---------+
 | $randomProductName            | Product name                               | Intelligent Steel Sausages, Awesome Rubber Cheese                                  |         |
 +-------------------------------+--------------------------------------------+------------------------------------------------------------------------------------+---------+
-| $randomPrice                  | Price                                      | 244.00, 301.00                                                                     | [9]_    |
+| $randomPrice                  | Price                                      | 244.00, 301.00                                                                     | [3]_    |
 +-------------------------------+--------------------------------------------+------------------------------------------------------------------------------------+---------+
 | $randomProductAdjective       | Product adjective                          | Refined, Handcrafted, Handmade, Sleek                                              |         |
 +-------------------------------+--------------------------------------------+------------------------------------------------------------------------------------+---------+
@@ -97,8 +97,6 @@ Note: the autocomplete support in the Request Builder might be missing.
 +-------------------------------+--------------------------------------------+------------------------------------------------------------------------------------+---------+
 | $randomDateFuture             | Date in the future                         | Wed Nov 20 2019 20:26:40 GMT+0800 (WITA)                                           |         |
 +-------------------------------+--------------------------------------------+------------------------------------------------------------------------------------+---------+
-| $randomDateBetween            | ???                                        | Invalid Date                                                                       | [10]_   |
-+-------------------------------+--------------------------------------------+------------------------------------------------------------------------------------+---------+
 | $randomDateRecent             | Recent date                                | Thu Jun 20 2019 13:29:11 GMT+0800 (WITA)                                           |         |
 +-------------------------------+--------------------------------------------+------------------------------------------------------------------------------------+---------+
 | $randomMonth                  | Month                                      | February, April                                                                    |         |
@@ -121,11 +119,11 @@ Note: the autocomplete support in the Request Builder might be missing.
 +-------------------------------+--------------------------------------------+------------------------------------------------------------------------------------+---------+
 | $randomCurrencySymbol         | Currency symbol                            | $, лв, Kč                                                                          |         |
 +-------------------------------+--------------------------------------------+------------------------------------------------------------------------------------+---------+
-| $randomBitcoin                | ???                                        | 1XEW2WNQXFLUPQJU8F3D6OCJHV9UR                                                      | [11]_   |
+| $randomBitcoin                | ???                                        | 1URwKxDpfEkTYNGYfKBZUWcuavqbSL                                                     |         |
 +-------------------------------+--------------------------------------------+------------------------------------------------------------------------------------+---------+
-| $randomBankAccountIban        | IBAN                                       | PK46Y5057900541310025311                                                           | [12]_   |
+| $randomBankAccountIban        | IBAN                                       | PK46Y5057900541310025311                                                           | [6]_    |
 +-------------------------------+--------------------------------------------+------------------------------------------------------------------------------------+---------+
-| $randomBankAccountBic         | BIC                                        | YQCIFMA1762                                                                        | [13]_   |
+| $randomBankAccountBic         | BIC                                        | YQCIFMA1762                                                                        | [7]_    |
 +-------------------------------+--------------------------------------------+------------------------------------------------------------------------------------+---------+
 | $randomAbbreviation           | Abbreviation                               | RSS, SQL, TCP, HTTP, SMS                                                           |         |
 +-------------------------------+--------------------------------------------+------------------------------------------------------------------------------------+---------+
@@ -169,7 +167,7 @@ Note: the autocomplete support in the Request Builder might be missing.
 +-------------------------------+--------------------------------------------+------------------------------------------------------------------------------------+---------+
 | $randomImageDataUri           | Image as data URI                          | data:image/svg+xml;charset=UTF-8,%3Csvg%20 ...                                     |         |
 +-------------------------------+--------------------------------------------+------------------------------------------------------------------------------------+---------+
-| $randomEmail                  | Email from popular email providers         | Mable_Crist@hotmail.com, Ervin47@gmail.com                                         | [14]_   |
+| $randomEmail                  | Email from popular email providers         | Mable_Crist@hotmail.com, Ervin47@gmail.com                                         | [8]_    |
 +-------------------------------+--------------------------------------------+------------------------------------------------------------------------------------+---------+
 | $randomExampleEmail           | Example email                              | Ayla.Kozey27@example.net, Adrian.Hickle@example.com                                |         |
 +-------------------------------+--------------------------------------------+------------------------------------------------------------------------------------+---------+
@@ -209,11 +207,11 @@ Note: the autocomplete support in the Request Builder might be missing.
 +-------------------------------+--------------------------------------------+------------------------------------------------------------------------------------+---------+
 | $randomLoremParagraph         | Lorem ipsum paragraph                      | Asperiores dolor illo. Ex ...                                                      |         |
 +-------------------------------+--------------------------------------------+------------------------------------------------------------------------------------+---------+
-| $randomLoremParagraphs        | Lorem ipsum paragraphs                     | Saepe unde qui rerum ...                                                           | [15]_   |
+| $randomLoremParagraphs        | Lorem ipsum paragraphs                     | Saepe unde qui rerum ...                                                           | [9]_    |
 +-------------------------------+--------------------------------------------+------------------------------------------------------------------------------------+---------+
-| $randomLoremText              | Lorem ipsum text                           | Ipsam repellat qui aspernatur ...                                                  | [16]_   |
+| $randomLoremText              | Lorem ipsum text                           | Ipsam repellat qui aspernatur ...                                                  | [10]_   |
 +-------------------------------+--------------------------------------------+------------------------------------------------------------------------------------+---------+
-| $randomLoremLines             | Lorem ipsum text                           |  aliquid enim reiciendis ...                                                       | [17]_   |
+| $randomLoremLines             | Lorem ipsum text                           |  aliquid enim reiciendis ...                                                       | [11]_   |
 +-------------------------------+--------------------------------------------+------------------------------------------------------------------------------------+---------+
 | $randomFirstName              | First name                                 | Dillan, Sedrick, Daniela                                                           |         |
 +-------------------------------+--------------------------------------------+------------------------------------------------------------------------------------+---------+
@@ -227,7 +225,7 @@ Note: the autocomplete support in the Request Builder might be missing.
 +-------------------------------+--------------------------------------------+------------------------------------------------------------------------------------+---------+
 | $randomNameSuffix             | Title (used as suffix)                     | I, II, Sr., MD, PhD                                                                |         |
 +-------------------------------+--------------------------------------------+------------------------------------------------------------------------------------+---------+
-| $randomNameTitle              | Job title                                  | Product Markets Administrator, Internal Functionality Producer                     | [18]_   |
+| $randomNameTitle              | Job title                                  | Product Markets Administrator, Internal Functionality Producer                     | [12]_   |
 +-------------------------------+--------------------------------------------+------------------------------------------------------------------------------------+---------+
 | $randomJobDescriptor          | Job title descriptor                       | Corporate, Global, International, Chief, Lead                                      |         |
 +-------------------------------+--------------------------------------------+------------------------------------------------------------------------------------+---------+
@@ -235,9 +233,9 @@ Note: the autocomplete support in the Request Builder might be missing.
 +-------------------------------+--------------------------------------------+------------------------------------------------------------------------------------+---------+
 | $randomJobType                | Job type                                   | Administrator, Consultant, Supervisor                                              |         |
 +-------------------------------+--------------------------------------------+------------------------------------------------------------------------------------+---------+
-| $randomPhoneNumber            | Phone number                               | 946.539.2542 x582, (681) 083-2162                                                  | [19]_   |
+| $randomPhoneNumber            | Phone number                               | 946.539.2542 x582, (681) 083-2162                                                  | [13]_   |
 +-------------------------------+--------------------------------------------+------------------------------------------------------------------------------------+---------+
-| $randomPhoneNumberFormat      | Phone number                               | 840-883-9861, 353-461-5243                                                         | [20]_   |
+| $randomPhoneNumberFormat      | Phone number                               | 840-883-9861, 353-461-5243                                                         | [14]_   |
 +-------------------------------+--------------------------------------------+------------------------------------------------------------------------------------+---------+
 | $randomPhoneFormats           | Phone number format                        | ###.###.####, 1-###-###-#### x###, (###) ###-####                                  |         |
 +-------------------------------+--------------------------------------------+------------------------------------------------------------------------------------+---------+
@@ -247,13 +245,13 @@ Note: the autocomplete support in the Request Builder might be missing.
 +-------------------------------+--------------------------------------------+------------------------------------------------------------------------------------+---------+
 | $randomUUID                   | UUID                                       | 1f9a0bc0-582c-466f-ba78-67b82ebbd8a8                                               |         |
 +-------------------------------+--------------------------------------------+------------------------------------------------------------------------------------+---------+
-| $randomBoolean                | Boolean                                    | true, false                                                                        | [21]_   |
+| $randomBoolean                | Boolean                                    | true, false                                                                        | [15]_   |
 +-------------------------------+--------------------------------------------+------------------------------------------------------------------------------------+---------+
 | $randomWord                   | Word or abbreviation                       | transmitting, PCI, West Virginia                                                   |         |
 +-------------------------------+--------------------------------------------+------------------------------------------------------------------------------------+---------+
-| $randomWords                  | Words                                      | portal bypassing indigo, Cotton transmitting                                       | [22]_   |
+| $randomWords                  | Words                                      | portal bypassing indigo, Cotton transmitting                                       | [16]_   |
 +-------------------------------+--------------------------------------------+------------------------------------------------------------------------------------+---------+
-| $randomLocale                 | Locale                                     | en                                                                                 | [23]_   |
+| $randomLocale                 | Locale                                     | en                                                                                 |         |
 +-------------------------------+--------------------------------------------+------------------------------------------------------------------------------------+---------+
 | $randomAlphaNumeric           | Alphanumeric character                     | 4, a, h                                                                            |         |
 +-------------------------------+--------------------------------------------+------------------------------------------------------------------------------------+---------+
@@ -271,9 +269,9 @@ Note: the autocomplete support in the Request Builder might be missing.
 +-------------------------------+--------------------------------------------+------------------------------------------------------------------------------------+---------+
 | $randomFileExt                | File extension                             | xsm, zirz, xar                                                                     |         |
 +-------------------------------+--------------------------------------------+------------------------------------------------------------------------------------+---------+
-| $randomDirectoryPath          | Directory path                             |                                                                                    | [24]_   |
+| $randomDirectoryPath          | Directory path                             |                                                                                    |         |
 +-------------------------------+--------------------------------------------+------------------------------------------------------------------------------------+---------+
-| $randomFilePath               | File path                                  |                                                                                    | [25]_   |
+| $randomFilePath               | File path                                  |                                                                                    |         |
 +-------------------------------+--------------------------------------------+------------------------------------------------------------------------------------+---------+
 | $randomSemver                 | Version (using semantic version)           | 6.3.4, 2.8.0, 1.7.6                                                                |         |
 +-------------------------------+--------------------------------------------+------------------------------------------------------------------------------------+---------+
@@ -283,23 +281,17 @@ Note: the autocomplete support in the Request Builder might be missing.
     \end{landscape}
 
 
-.. [2] Limited usability as you cannot specify a country.
-.. [3] Warning: it may generate invalid data, with street numbers starting with 0. Limited usability as you cannot specify a country. 
-.. [9] Not possible to specify a format. It seems that the price is never with a subdivision (cents). Alternative: $randomCurrencyAmount.
-.. [10] Seems to be broken.
-.. [11] Does not look like a Bitcoin address.
-.. [12] May not be a valid IBAN.
-.. [13] May not be a valid BIC.
-.. [14] Better use example emails.
-.. [15] Includes \\n \\r characters (CR + LF).
-.. [16] Length is unpredictable. May include \\n \\r characters (CR + LF).
-.. [17] Length is unpredictable. May include \\n  characters (LF).
-.. [18] Seems to overlap with $$randomJobTitle.
-.. [19] Random format. Cannot specify a format / country.
-.. [20] Fixed format. Cannot specify another format / country
-.. [21] Warning: the output is still a string!
-.. [22] May return only one word.
-.. [23] Seems broken as it returns only "en".
-.. [24] Seems broken.
-.. [25] Seems broken.
-
+.. [1] Limited usability as you cannot specify a country.
+.. [2] Warning: it may generate invalid data, with street numbers starting with 0. Limited usability as you cannot specify a country. 
+.. [3] Not possible to specify a format. It seems that the price is never with a subdivision (cents). Alternative: $randomCurrencyAmount.
+.. [6] May not be a valid IBAN.
+.. [7] May not be a valid BIC.
+.. [8] Better use example emails.
+.. [9] Includes \\n \\r characters (CR + LF).
+.. [10] Length is unpredictable. May include \\n \\r characters (CR + LF).
+.. [11] Length is unpredictable. May include \\n  characters (LF).
+.. [12] Seems to overlap with $$randomJobTitle.
+.. [13] Random format. Cannot specify a format / country.
+.. [14] Fixed format. Cannot specify another format / country
+.. [15] Warning: the output is still a string!
+.. [16] May return only one word.
