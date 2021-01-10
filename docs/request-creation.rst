@@ -162,7 +162,7 @@ Below I am fetching a name from a remote API and setting it as a variable for us
     pm.sendRequest(options, function (error, response) {
         if (error) throw new Error(error);
         var jsonData = response.json();
-        pm.globals.set('name', 'jsonData.name');
+        pm.globals.set('name', jsonData.name);
     });
 
 **Tip** You can generate such requests by using the "Code" generator button right below the Save button, once you have a request that works. There you can Select NodeJS > Request and the syntax generated is very similar to what Postman expects. 
