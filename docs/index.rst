@@ -43,4 +43,5 @@ Online course
    :maxdepth: 2
    :caption: Additional resourses:
 
+   contributions
    course
