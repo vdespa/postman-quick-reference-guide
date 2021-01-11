@@ -158,7 +158,7 @@ The assertion can look like: ::
 
     pm.test("Should be subscriber or customer", function () {
         var jsonData = pm.response.json();
-        pm.expect(.TargetType).to.be.oneOf(["Subscriber", "Customer"]);
+        pm.expect(jsonData.ACL[0].TargetType).to.be.oneOf(["Subscriber", "Customer"]);
     });
 
 where:
