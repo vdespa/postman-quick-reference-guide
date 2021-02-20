@@ -43,7 +43,7 @@ This is the JSON schema with a property named code of type String: ::
     };
 
 Possible types are:
-    - integer
+    - string
     - number
     - boolean
     - null
