@@ -47,7 +47,7 @@ Possible types are:
     - number
     - boolean
     - null
-    - Object
+    - object
     - array
 
 Object has required property
