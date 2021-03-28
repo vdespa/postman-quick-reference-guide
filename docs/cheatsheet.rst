@@ -298,10 +298,8 @@ Check if a key exists in the response: ::
 
     pm.test("Should have an auth token", function () {
         var jsonData = pm.response.json();
-        pm.expect(_.has(jsonData, 'data.token')).to.be.true;
+        pm.expect(jsonData).to.have.nested.property('data.token');
     });
-
-Note: lodash is built into the sandbox. More info https://learning.postman.com/docs/writing-scripts/script-references/postman-sandbox-api-reference/#using-external-libraries
 
 **XML responses**
 
