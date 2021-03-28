@@ -294,6 +294,15 @@ Nested value check: ::
 
     pm.expect(response.products.0.category).to.eql('Detergent');
 
+Check if a key exists in the response: ::
+
+    pm.test("Should have an auth token", function () {
+        var jsonData = pm.response.json();
+        pm.expect(_.has(jsonData, 'data.token')).to.be.true;
+    });
+
+Note: lodash is built into the sandbox. More info https://learning.postman.com/docs/writing-scripts/script-references/postman-sandbox-api-reference/#using-external-libraries
+
 **XML responses**
 
 Convert XML body to JSON: ::
