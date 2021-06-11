@@ -90,7 +90,7 @@ This is the JSON schema with the an nested object named "error" that has a prope
             "error": { 
                 "type": "object",
                 "properties": {
-                    "message": { type: "string" }
+                    "message": { "type": "string" }
                 },
                 "required": ["message"]
             }
