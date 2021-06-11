@@ -14,3 +14,4 @@ Thank you for all who have contributed to making this guide better.
 - Joseph Klos (@joeklos)
 - Florian Mayer (@flomayer)
 - Zuba Zenovka (@EzikMarconi)
+- sweetnoods (@sweetnoods)
