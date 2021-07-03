@@ -57,6 +57,62 @@ In the request body you can simply use ``{{user}}``. This also works just as wel
         }
     }
 
+How can I create or modify the request body?
+--------------------------------------------
+
+You can use `console.log(pm.request.body)` to understand the current data structure of the request body. 
+With the method `pm.request.body.update` you can update the request. 
+
+**Create/replace JSON request body** ::
+
+    const body = {
+        mode: "raw",
+        raw: JSON.stringify(
+            {
+                name: "jane",
+                age: 33
+            }
+        ),
+        options: {
+            raw: {
+                language: "json"
+            }
+        }
+    }
+
+    pm.request.body.update(body);
+
+**Add property to JSON request body** ::
+
+    const body = JSON.parse(pm.request.body.raw);
+    body.email = 'jane@example.com';
+    pm.request.body.raw = body;
+
+**Encode request body as base64** ::
+
+    pm.request.body.update(btoa(pm.request.body.toString()));
+
+**Removing comments from JSON body** ::
+
+    const jsonWithComments = pm.request.body.toString();
+    const jsonWithoutComments = jsonWithComments.replace(/\\"|"(?:\\"|[^"])*"|(\/\/.*|\/\*[\s\S]*?\*\/)/g, (m, g) => g ? "" : m)
+
+    // Regex from Stackoverflow: https://stackoverflow.com/a/62945875/766177
+    // & Postman issue tracker (@codenirvana): https://github.com/postmanlabs/postman-app-support/issues/4808
+
+    const body = {
+        mode: "raw",
+        raw: jsonWithoutComments,
+        options: {
+            raw: {
+                language: "json"
+            }
+        }
+    }
+
+    pm.request.body.update(body);
+
+
 How can I modify the request headers?
 -------------------------------------
 
