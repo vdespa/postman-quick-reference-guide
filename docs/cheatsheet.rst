@@ -294,6 +294,13 @@ Nested value check: ::
 
     pm.expect(response.products.0.category).to.eql('Detergent');
 
+Check if a key exists in the response: ::
+
+    pm.test("Should have an auth token", function () {
+        var jsonData = pm.response.json();
+        pm.expect(jsonData).to.have.nested.property('data.token');
+    });
+
 **XML responses**
 
 Convert XML body to JSON: ::
