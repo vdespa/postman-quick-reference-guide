@@ -274,7 +274,7 @@ You need to use JSON.stringify() before saving objects / arrays to a Postman var
 
 In the next request where you want to retrieve the data, just use:
 
-- ``{myData}}`` if you are inside the request builder
+- ``{{myData}}`` if you are inside the request builder
 - ``var myData = JSON.parse(pm.environment.get('myData'));``
 
 Using JSON.stringify and JSON.parse methods is not needed if the values are strings or integers or booleans. 
