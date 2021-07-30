@@ -15,3 +15,4 @@ Thank you for all who have contributed to making this guide better.
 - Florian Mayer (@flomayer)
 - Zuba Zenovka (@EzikMarconi)
 - sweetnoods (@sweetnoods)
+- gassims (@gassims)
