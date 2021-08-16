@@ -21,6 +21,19 @@ Example fetching a CSRF code form the meta tag: ::
 
 Read more: https://github.com/cheeriojs/cheerio
 
+**Moment.js**
+
+Moment.js is already built into Postman and can make your life easier if you are working with dates. 
+
+Here is a basic usage example: ::
+
+    const moment = require('moment');
+    moment('2021-08-15').add(1, 'days').format('DD.MM.YYYY')
+
+This script will parse a date, will add one day and will reformat the date.
+
+Read more: https://momentjs.com/docs
+
 **crypto-js**
 
 Library which implements different crypto functions.
