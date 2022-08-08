@@ -45,6 +45,7 @@ This is the JSON schema with a property named code of type String: ::
 Possible types are:
     - string
     - number
+    - integer
     - boolean
     - null
     - object
