@@ -13,7 +13,7 @@ You are inside a script, so you need to use the pm.* API to get to that variable
 
 Example: ::
 
-    var requestUrl = pm.environment.get("url") + "/mediaitem/"); 
+    var requestUrl = pm.environment.get("url") + "/mediaitem/"; 
         
     pm.sendRequest(requestUrl, function (err, res) {
         // do stuff
