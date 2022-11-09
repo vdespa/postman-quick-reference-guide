@@ -14,7 +14,7 @@ If you are not already a student of this course you are missing on a lot of trai
 - Q&A Forum where you can get answers to your Postman problems
 - and much more
 
-If you want to register for this course, you can find more details (including a discount here):
+If you want to register for this course, you can find more details here:
 
 https://vdespa.com/courses
 

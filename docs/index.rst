@@ -36,12 +36,13 @@ Simple solutions to common problems
    workflows
    newman
 
-Online course
----------------
+About
+-----
 
 .. toctree::
    :maxdepth: 2
    :caption: Additional resourses:
 
+   legal
    contributions
    course
