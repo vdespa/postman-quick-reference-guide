@@ -17,3 +17,4 @@ Thank you for all who have contributed to making this guide better.
 - sweetnoods (@sweetnoods)
 - gassims (@gassims)
 - Carl Bray (@carlbray)
+- Ahmed Fayez Salama (@A-Fayez92)
